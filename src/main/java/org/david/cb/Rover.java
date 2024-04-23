@@ -34,6 +34,17 @@ public class Rover {
         }
     }
 
+    public Rover rotateLeft() {
+        if(Orientation.NORTH == this.orientation) {
+            return new Rover(this.coordinates, Orientation.WEST);
+        } else if (Orientation.WEST == this.orientation) {
+            return new Rover(this.coordinates, Orientation.SOUTH);
+        }
+
+        return this;
+
+    }
+
     public Orientation getOrientation() {
         return orientation;
     }
@@ -42,7 +53,4 @@ public class Rover {
         return coordinates;
     }
 
-    public Rover rotateLeft() {
-        return new Rover(this.coordinates, Orientation.WEST);
-    }
 }
