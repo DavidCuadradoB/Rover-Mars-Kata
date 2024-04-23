@@ -17,9 +17,9 @@ public class Rover {
             return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
         } else if (this.orientation == Orientation.SOUTH) {
             return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() - 1), this.orientation);
+        } else {
+            return new Rover(new Coordinates(coordinates.getX() - 1, coordinates.getY()), this.orientation);
         }
-
-        return this;
     }
 
     public Rover rotateRight() {

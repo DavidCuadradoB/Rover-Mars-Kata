@@ -49,6 +49,17 @@ class RoverTest {
     }
 
     @Test
+    void moveForward_west_should_move_to_west() {
+        int y = 5;
+        int x = 5;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.WEST);
+        Rover movedRover = rover.moveForward();
+        Coordinates coordinates = movedRover.getCoordinates();
+        Assertions.assertEquals(coordinates.getX(), x-1);
+        Assertions.assertEquals(coordinates.getY(), y);
+    }
+
+    @Test
     void rotate_right_should_rotate_east() {
         int y = 0;
         int x = 0;
