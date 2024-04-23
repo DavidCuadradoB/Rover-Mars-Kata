@@ -16,7 +16,7 @@ class RoverTest {
     }
 
     @Test
-    void moveForward_north_should_move_to_north() {
+    void rover_orientation_north_moveForward_north_should_move_to_north() {
         int y = 0;
         int x = 0;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.NORTH);
@@ -27,7 +27,7 @@ class RoverTest {
     }
 
     @Test
-    void moveForward_east_should_move_to_east() {
+    void rover_orientation_east_moveForward_east_should_move_to_east() {
         int y = 0;
         int x = 0;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.EAST);
@@ -38,7 +38,7 @@ class RoverTest {
     }
 
     @Test
-    void moveForward_south_should_move_to_south() {
+    void rover_orientation_south_moveForward_south_should_move_to_south() {
         int y = 5;
         int x = 5;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.SOUTH);
@@ -49,7 +49,7 @@ class RoverTest {
     }
 
     @Test
-    void moveForward_west_should_move_to_west() {
+    void rover_orientation_west_moveForward_west_should_move_to_west() {
         int y = 5;
         int x = 5;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.WEST);
