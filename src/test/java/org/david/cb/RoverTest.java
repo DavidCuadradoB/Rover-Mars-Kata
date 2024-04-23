@@ -60,11 +60,21 @@ class RoverTest {
     }
 
     @Test
-    void rotate_right_should_rotate_east() {
+    void rover_orientation_north_when_rotate_right_should_rotate_east() {
         int y = 0;
         int x = 0;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.NORTH);
         Rover rotatedRover = rover.rotateRight();
         Assertions.assertEquals(Orientation.EAST, rotatedRover.getOrientation());
     }
+
+    @Test
+    void rover_orientation_east_when_rotate_right_should_rotate_south() {
+        int y = 0;
+        int x = 0;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.EAST);
+        Rover rotatedRover = rover.rotateRight();
+        Assertions.assertEquals(Orientation.SOUTH, rotatedRover.getOrientation());
+    }
+
 }
