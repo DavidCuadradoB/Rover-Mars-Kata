@@ -11,11 +11,11 @@ public class Rover {
     }
 
     public Rover moveForward() {
-        if (this.orientation == Orientation.NORTH) {
+        if (Orientation.NORTH == this.orientation) {
             return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() + 1), this.orientation);
-        } else if (this.orientation == Orientation.EAST) {
+        } else if (Orientation.EAST == this.orientation) {
             return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
-        } else if (this.orientation == Orientation.SOUTH) {
+        } else if (Orientation.SOUTH == this.orientation) {
             return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() - 1), this.orientation);
         } else {
             return new Rover(new Coordinates(coordinates.getX() - 1, coordinates.getY()), this.orientation);
