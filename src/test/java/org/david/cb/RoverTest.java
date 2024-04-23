@@ -122,5 +122,14 @@ class RoverTest {
         Assertions.assertEquals(Orientation.EAST, rotatedRover.getOrientation());
     }
 
+    @Test
+    void rover_orientation_east_when_rotate_left_should_rotate_north() {
+        int y = 0;
+        int x = 0;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.EAST);
+        Rover rotatedRover = rover.rotateLeft();
+        Assertions.assertEquals(Orientation.NORTH, rotatedRover.getOrientation());
+    }
+
 
 }
