@@ -12,9 +12,11 @@ public class Rover {
 
     public Rover moveForward() {
         if (this.orientation == Orientation.NORTH) {
-            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() +1), this.orientation);
+            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() + 1), this.orientation);
         } else if (this.orientation == Orientation.EAST) {
             return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
+        } else if (this.orientation == Orientation.SOUTH) {
+            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() - 1), this.orientation);
         }
 
         return this;

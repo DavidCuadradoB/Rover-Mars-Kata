@@ -35,7 +35,17 @@ class RoverTest {
         Coordinates coordinates = movedRover.getCoordinates();
         Assertions.assertEquals(coordinates.getX(), x + 1);
         Assertions.assertEquals(coordinates.getY(), y);
+    }
 
+    @Test
+    void moveForward_south_should_move_to_south() {
+        int y = 5;
+        int x = 5;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.SOUTH);
+        Rover movedRover = rover.moveForward();
+        Coordinates coordinates = movedRover.getCoordinates();
+        Assertions.assertEquals(coordinates.getX(), x);
+        Assertions.assertEquals(coordinates.getY(), y-1);
     }
 
     @Test
