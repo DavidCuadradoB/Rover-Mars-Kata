@@ -6,22 +6,32 @@ import org.junit.jupiter.api.Test;
 class RoverTest {
 
     @Test
-    void create_rover_should_work() {
+    void create_should_work() {
         Coordinates coordinates = new Coordinates(0, 0);
-        Rover rover = new Rover(coordinates);
+        Orientation orientation = Orientation.NORTH;
+        Rover rover = new Rover(coordinates, orientation);
         Assertions.assertNotNull(rover);
         Assertions.assertEquals(coordinates, rover.getCoordinates());
+        Assertions.assertEquals(orientation, rover.getOrientation());
     }
 
     @Test
-    void move_north_the_rover_should_move_Forward_north() {
+    void move_north_should_moveForward_north() {
         int y = 0;
         int x = 0;
-        Rover rover = new Rover(new Coordinates(x, y));
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.NORTH);
         Rover movedRover = rover.moveForward();
         Coordinates coordinates = movedRover.getCoordinates();
         Assertions.assertEquals(coordinates.getX(), x);
         Assertions.assertEquals(coordinates.getY(), y + 1);
     }
 
+    @Test
+    void rotate_right_should_rotate_east() {
+        int y = 0;
+        int x = 0;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.NORTH);
+        Rover rotatedRover = rover.rotateRight();
+        Assertions.assertEquals(Orientation.EAST, rotatedRover.getOrientation());
+    }
 }
