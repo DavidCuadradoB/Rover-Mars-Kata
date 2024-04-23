@@ -41,4 +41,8 @@ public class Rover {
     public Coordinates getCoordinates() {
         return coordinates;
     }
+
+    public Rover rotateLeft() {
+        return new Rover(this.coordinates, Orientation.WEST);
+    }
 }
