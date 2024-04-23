@@ -16,7 +16,7 @@ class RoverTest {
     }
 
     @Test
-    void move_north_should_moveForward_north() {
+    void moveForward_north_should_move_to_north() {
         int y = 0;
         int x = 0;
         Rover rover = new Rover(new Coordinates(x, y), Orientation.NORTH);
@@ -24,6 +24,18 @@ class RoverTest {
         Coordinates coordinates = movedRover.getCoordinates();
         Assertions.assertEquals(coordinates.getX(), x);
         Assertions.assertEquals(coordinates.getY(), y + 1);
+    }
+
+    @Test
+    void moveForward_east_should_move_to_east() {
+        int y = 0;
+        int x = 0;
+        Rover rover = new Rover(new Coordinates(x, y), Orientation.EAST);
+        Rover movedRover = rover.moveForward();
+        Coordinates coordinates = movedRover.getCoordinates();
+        Assertions.assertEquals(coordinates.getX(), x + 1);
+        Assertions.assertEquals(coordinates.getY(), y);
+
     }
 
     @Test

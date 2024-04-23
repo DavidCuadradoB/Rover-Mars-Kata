@@ -11,8 +11,13 @@ public class Rover {
     }
 
     public Rover moveForward() {
-        Coordinates newCoordinates = new Coordinates(coordinates.getX(), coordinates.getY() +1);
-        return new Rover(newCoordinates, this.orientation);
+        if (this.orientation == Orientation.NORTH) {
+            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() +1), this.orientation);
+        } else if (this.orientation == Orientation.EAST) {
+            return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
+        }
+
+        return this;
     }
 
     public Rover rotateRight() {
