@@ -23,7 +23,7 @@ public class Rover {
     }
 
     public Rover rotateRight() {
-        if(Orientation.NORTH == this.orientation) {
+        if (Orientation.NORTH == this.orientation) {
             return new Rover(this.coordinates, Orientation.EAST);
         } else if (Orientation.EAST == this.orientation) {
             return new Rover(this.coordinates, Orientation.SOUTH);
@@ -35,7 +35,7 @@ public class Rover {
     }
 
     public Rover rotateLeft() {
-        if(Orientation.NORTH == this.orientation) {
+        if (Orientation.NORTH == this.orientation) {
             return new Rover(this.coordinates, Orientation.WEST);
         } else if (Orientation.WEST == this.orientation) {
             return new Rover(this.coordinates, Orientation.SOUTH);

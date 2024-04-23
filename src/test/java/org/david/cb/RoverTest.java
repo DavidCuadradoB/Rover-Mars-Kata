@@ -45,7 +45,7 @@ class RoverTest {
         Rover movedRover = rover.moveForward();
         Coordinates coordinates = movedRover.getCoordinates();
         Assertions.assertEquals(coordinates.getX(), x);
-        Assertions.assertEquals(coordinates.getY(), y-1);
+        Assertions.assertEquals(coordinates.getY(), y - 1);
     }
 
     @Test
@@ -55,7 +55,7 @@ class RoverTest {
         Rover rover = new Rover(new Coordinates(x, y), Orientation.WEST);
         Rover movedRover = rover.moveForward();
         Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), x-1);
+        Assertions.assertEquals(coordinates.getX(), x - 1);
         Assertions.assertEquals(coordinates.getY(), y);
     }
 
@@ -130,6 +130,4 @@ class RoverTest {
         Rover rotatedRover = rover.rotateLeft();
         Assertions.assertEquals(Orientation.NORTH, rotatedRover.getOrientation());
     }
-
-
 }
