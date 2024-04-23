@@ -29,8 +29,9 @@ public class Rover {
             return new Rover(this.coordinates, Orientation.SOUTH);
         } else if (Orientation.SOUTH == this.orientation) {
             return new Rover(this.coordinates, Orientation.WEST);
+        } else {
+            return new Rover(this.coordinates, Orientation.NORTH);
         }
-        return this;
     }
 
     public Orientation getOrientation() {
