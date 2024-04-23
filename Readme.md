@@ -1,0 +1,1 @@
+* Rover: Use moveForward instead move because this way is more explicit that the Rover will move forward and if in the future we have a moveBackward, will be more easy to add.
