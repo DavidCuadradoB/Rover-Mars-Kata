@@ -16,19 +16,6 @@ class RoverTest {
     }
 
     @Test
-    void rover_execute_left_should_rotate_left() {
-        Coordinates coordinates = new Coordinates(5, 7);
-        Rover rover = new Rover(coordinates, EAST);
-
-        String commands = "L";
-        MoveCommand command = new MoveCommand(commands);
-
-        Rover movedRover = rover.execute(command);
-
-        Assertions.assertEquals(NORTH, movedRover.getOrientation());
-    }
-
-    @Test
     void rover_create_rover_should_be_created_in_the_indicated_orientation() {
         Coordinates coordinates = new Coordinates(2, 3);
         Orientation orientation = SOUTH;
@@ -38,47 +25,55 @@ class RoverTest {
     }
 
     @Test
-    void rover_orientation_north_moveForward_north_should_move_to_north() {
-        int y = 0;
-        int x = 0;
-        Rover rover = new Rover(new Coordinates(x, y), NORTH);
-        Rover movedRover = rover.moveForward();
+    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north() {
+        Rover rover = getRover(NORTH);
+        String commands = "M";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
         Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), x);
-        Assertions.assertEquals(coordinates.getY(), y + 1);
+        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX());
+        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY() + 1);
     }
 
     @Test
-    void rover_orientation_east_moveForward_east_should_move_to_east() {
-        int y = 0;
-        int x = 0;
-        Rover rover = new Rover(new Coordinates(x, y), EAST);
-        Rover movedRover = rover.moveForward();
+    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east() {
+        Rover rover = getRover(EAST);
+        String commands = "M";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
         Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), x + 1);
-        Assertions.assertEquals(coordinates.getY(), y);
+        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX() + 1);
+        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY());
     }
 
     @Test
-    void rover_orientation_south_moveForward_south_should_move_to_south() {
-        int y = 5;
-        int x = 5;
-        Rover rover = new Rover(new Coordinates(x, y), SOUTH);
-        Rover movedRover = rover.moveForward();
+    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south() {
+        Rover rover = getRover(SOUTH);
+        String commands = "M";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
         Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), x);
-        Assertions.assertEquals(coordinates.getY(), y - 1);
+        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX());
+        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY() - 1);
     }
 
     @Test
-    void rover_orientation_west_moveForward_west_should_move_to_west() {
-        int y = 5;
-        int x = 5;
-        Rover rover = new Rover(new Coordinates(x, y), WEST);
-        Rover movedRover = rover.moveForward();
+    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west() {
+        Rover rover = getRover(WEST);
+        String commands = "M";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
         Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), x - 1);
-        Assertions.assertEquals(coordinates.getY(), y);
+        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX() - 1);
+        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY());
     }
 
     @Test

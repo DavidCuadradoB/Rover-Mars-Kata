@@ -63,6 +63,8 @@ public class Rover {
                 moved_rover = rotateLeft();
             } else if (c == 'R') {
                 moved_rover = rotateRight();
+            } else if (c == 'M') {
+                moved_rover = moveForward();
             }
         }
 
