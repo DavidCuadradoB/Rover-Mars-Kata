@@ -25,7 +25,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north() throws IncorrectCommandException {
+    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north()
+            throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
         String commands = "M";
         MoveCommand command = new MoveCommand(commands);
@@ -40,7 +41,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east() throws IncorrectCommandException {
+    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east()
+            throws IncorrectCommandException {
         Rover rover = getRover(EAST);
         String commands = "M";
         MoveCommand command = new MoveCommand(commands);
@@ -55,7 +57,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south() throws IncorrectCommandException {
+    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south()
+            throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
         String commands = "M";
         MoveCommand command = new MoveCommand(commands);
@@ -70,7 +73,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west() throws IncorrectCommandException {
+    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west()
+            throws IncorrectCommandException {
         Rover rover = getRover(WEST);
         String commands = "M";
         MoveCommand command = new MoveCommand(commands);
@@ -85,7 +89,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_right_when_the_rover_is_facing_north_the_rover_should_rotate_to_east() throws IncorrectCommandException {
+    void execute_with_right_when_the_rover_is_facing_north_the_rover_should_rotate_to_east()
+            throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
         String commands = "R";
         MoveCommand command = new MoveCommand(commands);
@@ -96,7 +101,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_right_when_the_rover_is_facing_east_the_rover_should_rotate_to_south() throws IncorrectCommandException {
+    void execute_with_right_when_the_rover_is_facing_east_the_rover_should_rotate_to_south()
+            throws IncorrectCommandException {
         Rover rover = getRover(EAST);
         String commands = "R";
         MoveCommand command = new MoveCommand(commands);
@@ -107,7 +113,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_right_when_the_rover_is_facing_south_the_rover_should_rotate_to_west() throws IncorrectCommandException {
+    void execute_with_right_when_the_rover_is_facing_south_the_rover_should_rotate_to_west()
+            throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
         String commands = "R";
         MoveCommand command = new MoveCommand(commands);
@@ -118,7 +125,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_right_when_the_rover_is_facing_west_the_rover_should_rotate_to_north() throws IncorrectCommandException {
+    void execute_with_right_when_the_rover_is_facing_west_the_rover_should_rotate_to_north()
+            throws IncorrectCommandException {
         Rover rover = getRover(WEST);
         String commands = "R";
         MoveCommand command = new MoveCommand(commands);
@@ -129,7 +137,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_left_when_the_rover_is_facing_north_the_rover_should_rotate_to_west() throws IncorrectCommandException {
+    void execute_with_left_when_the_rover_is_facing_north_the_rover_should_rotate_to_west()
+            throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
         String commands = "L";
         MoveCommand command = new MoveCommand(commands);
@@ -140,7 +149,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_left_when_the_rover_is_facing_west_the_rover_should_rotate_to_south() throws IncorrectCommandException {
+    void execute_with_left_when_the_rover_is_facing_west_the_rover_should_rotate_to_south()
+            throws IncorrectCommandException {
         Rover rover = getRover(WEST);
         String commands = "L";
         MoveCommand command = new MoveCommand(commands);
@@ -151,7 +161,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_left_when_the_rover_is_facing_south_the_rover_should_rotate_to_east() throws IncorrectCommandException {
+    void execute_with_left_when_the_rover_is_facing_south_the_rover_should_rotate_to_east()
+            throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
         String commands = "L";
         MoveCommand command = new MoveCommand(commands);
@@ -162,7 +173,8 @@ class RoverTest {
     }
 
     @Test
-    void execute_with_left_when_the_rover_is_facing_east_the_rover_should_rotate_to_north() throws IncorrectCommandException {
+    void execute_with_left_when_the_rover_is_facing_east_the_rover_should_rotate_to_north()
+            throws IncorrectCommandException {
         Rover rover = getRover(EAST);
         String commands = "L";
         MoveCommand command = new MoveCommand(commands);
