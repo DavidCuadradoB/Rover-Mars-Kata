@@ -3,6 +3,8 @@ package org.david.cb;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class RoverTest {
 
     @Test
@@ -12,6 +14,20 @@ class RoverTest {
         Rover rover = new Rover(coordinates, orientation);
         Assertions.assertNotNull(rover);
         Assertions.assertEquals(coordinates, rover.getCoordinates());
+    }
+
+    @Test
+    void rover_execute_left_should_rotate_left() {
+        Coordinates coordinates = new Coordinates(5, 7);
+        Orientation orientation = Orientation.EAST;
+        Rover rover = new Rover(coordinates, orientation);
+
+        String commands = "L";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
+        Assertions.assertEquals(Orientation.NORTH, movedRover.getOrientation());
     }
 
     @Test

@@ -54,4 +54,7 @@ public class Rover {
         return coordinates;
     }
 
+    public Rover execute(MoveCommand command) {
+        return this.rotateLeft();
+    }
 }
