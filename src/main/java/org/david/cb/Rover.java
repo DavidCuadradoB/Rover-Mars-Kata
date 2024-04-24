@@ -23,11 +23,12 @@ public class Rover {
         Rover moved_rover = this;
 
         for (char c : command.getCommands().toCharArray()) {
-            if (c == 'L') {
+            char commandUpperCase = Character.toUpperCase(c);
+            if (commandUpperCase == 'L') {
                 moved_rover = rotateLeft();
-            } else if (c == 'R') {
+            } else if (commandUpperCase == 'R') {
                 moved_rover = rotateRight();
-            } else if (c == 'M') {
+            } else if (commandUpperCase == 'M') {
                 moved_rover = moveForward();
             } else {
                 throw new IncorrectCommandException(c);

@@ -1,6 +1,8 @@
 package org.david.cb;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.david.cb.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,11 +26,11 @@ class RoverTest {
         assertEquals(orientation, rover.getOrientation());
     }
 
-    @Test
-    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north()
+    @ParameterizedTest
+    @ValueSource(strings = {"M", "m"})
+    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
-        String commands = "M";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -40,11 +42,11 @@ class RoverTest {
         assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
-    @Test
-    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east()
+    @ParameterizedTest
+    @ValueSource(strings = {"M", "m"})
+    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(EAST);
-        String commands = "M";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -56,11 +58,11 @@ class RoverTest {
         assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
-    @Test
-    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south()
+    @ParameterizedTest
+    @ValueSource(strings = {"M", "m"})
+    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
-        String commands = "M";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -72,11 +74,11 @@ class RoverTest {
         assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
-    @Test
-    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west()
+    @ParameterizedTest
+    @ValueSource(strings = {"M", "m"})
+    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(WEST);
-        String commands = "M";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -88,11 +90,11 @@ class RoverTest {
         assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
-    @Test
-    void execute_with_right_when_the_rover_is_facing_north_the_rover_should_rotate_to_east()
+    @ParameterizedTest
+    @ValueSource(strings = {"R", "r"})
+    void execute_with_right_when_the_rover_is_facing_north_the_rover_should_rotate_to_east(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
-        String commands = "R";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -100,11 +102,11 @@ class RoverTest {
         assertEquals(EAST, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_right_when_the_rover_is_facing_east_the_rover_should_rotate_to_south()
+    @ParameterizedTest
+    @ValueSource(strings = {"R", "r"})
+    void execute_with_right_when_the_rover_is_facing_east_the_rover_should_rotate_to_south(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(EAST);
-        String commands = "R";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -112,11 +114,11 @@ class RoverTest {
         assertEquals(SOUTH, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_right_when_the_rover_is_facing_south_the_rover_should_rotate_to_west()
+    @ParameterizedTest
+    @ValueSource(strings = {"R", "r"})
+    void execute_with_right_when_the_rover_is_facing_south_the_rover_should_rotate_to_west(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
-        String commands = "R";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -124,11 +126,11 @@ class RoverTest {
         assertEquals(WEST, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_right_when_the_rover_is_facing_west_the_rover_should_rotate_to_north()
+    @ParameterizedTest
+    @ValueSource(strings = {"R", "r"})
+    void execute_with_right_when_the_rover_is_facing_west_the_rover_should_rotate_to_north(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(WEST);
-        String commands = "R";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -136,11 +138,11 @@ class RoverTest {
         assertEquals(NORTH, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_left_when_the_rover_is_facing_north_the_rover_should_rotate_to_west()
+    @ParameterizedTest
+    @ValueSource(strings = {"L", "l"})
+    void execute_with_left_when_the_rover_is_facing_north_the_rover_should_rotate_to_west(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(NORTH);
-        String commands = "L";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -148,11 +150,11 @@ class RoverTest {
         assertEquals(WEST, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_left_when_the_rover_is_facing_west_the_rover_should_rotate_to_south()
+    @ParameterizedTest
+    @ValueSource(strings = {"L", "l"})
+    void execute_with_left_when_the_rover_is_facing_west_the_rover_should_rotate_to_south(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(WEST);
-        String commands = "L";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -160,11 +162,11 @@ class RoverTest {
         assertEquals(SOUTH, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_left_when_the_rover_is_facing_south_the_rover_should_rotate_to_east()
+    @ParameterizedTest
+    @ValueSource(strings = {"L", "l"})
+    void execute_with_left_when_the_rover_is_facing_south_the_rover_should_rotate_to_east(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(SOUTH);
-        String commands = "L";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -172,11 +174,11 @@ class RoverTest {
         assertEquals(EAST, movedRover.getOrientation());
     }
 
-    @Test
-    void execute_with_left_when_the_rover_is_facing_east_the_rover_should_rotate_to_north()
+    @ParameterizedTest
+    @ValueSource(strings = {"L", "l"})
+    void execute_with_left_when_the_rover_is_facing_east_the_rover_should_rotate_to_north(String commands)
             throws IncorrectCommandException {
         Rover rover = getRover(EAST);
-        String commands = "L";
         MoveCommand command = new MoveCommand(commands);
 
         Rover movedRover = rover.execute(command);
@@ -187,7 +189,7 @@ class RoverTest {
     @Test
     void execute_with_incorrect_value_should_throw_an_exception() {
         Rover rover = getRover(EAST);
-        String commands = "I";
+        String commands = "/";
         MoveCommand command = new MoveCommand(commands);
 
         IncorrectCommandException exception = assertThrows(
