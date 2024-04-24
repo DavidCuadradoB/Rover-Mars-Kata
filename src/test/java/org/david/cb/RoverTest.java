@@ -120,7 +120,7 @@ class RoverTest {
     }
 
     @Test
-    void rover_orientation_north_when_rotate_left_should_rotate_west() {
+    void execute_with_left_when_the_rover_is_facing_north_the_rover_should_rotate_to_west() {
         Coordinates coordinates = new Coordinates(5, 7);
         Orientation orientation = Orientation.NORTH;
         Rover rover = new Rover(coordinates, orientation);
@@ -134,7 +134,7 @@ class RoverTest {
     }
 
     @Test
-    void rover_orientation_west_when_rotate_left_should_rotate_south() {
+    void execute_with_left_when_the_rover_is_facing_west_the_rover_should_rotate_to_south() {
         Coordinates coordinates = new Coordinates(5, 7);
         Orientation orientation = Orientation.WEST;
         Rover rover = new Rover(coordinates, orientation);
@@ -148,7 +148,7 @@ class RoverTest {
     }
 
     @Test
-    void rover_orientation_south_when_rotate_left_should_rotate_east() {
+    void execute_with_left_when_the_rover_is_facing_south_the_rover_should_rotate_to_east() {
         Coordinates coordinates = new Coordinates(5, 7);
         Orientation orientation = Orientation.SOUTH;
         Rover rover = new Rover(coordinates, orientation);
