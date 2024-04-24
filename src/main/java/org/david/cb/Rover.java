@@ -18,7 +18,7 @@ public class Rover {
         return coordinates;
     }
 
-    public Rover execute(MoveCommand command) {
+    public Rover execute(MoveCommand command) throws IncorrectCommandException {
 
         Rover moved_rover = this;
 
@@ -29,8 +29,11 @@ public class Rover {
                 moved_rover = rotateRight();
             } else if (c == 'M') {
                 moved_rover = moveForward();
+            } else {
+                throw new IncorrectCommandException(c);
             }
         }
+
         return moved_rover;
     }
 

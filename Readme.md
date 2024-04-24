@@ -6,3 +6,4 @@
 * The Rover needs to be in a plateau. Could there are several rovers in the same plateau
 * There are a lot of logic in the rover. Try to simplify it.
 * Throw an exception when the command is incorrect
+* Pass r,l,m instead R,L,M
