@@ -7,8 +7,8 @@ class RoverTest {
 
     @Test
     void rover_create_rover_should_be_created_in_the_indicated_coordinates() {
-        Coordinates coordinates = new Coordinates(0, 0);
-        Orientation orientation = Orientation.NORTH;
+        Coordinates coordinates = new Coordinates(5, 7);
+        Orientation orientation = Orientation.EAST;
         Rover rover = new Rover(coordinates, orientation);
         Assertions.assertNotNull(rover);
         Assertions.assertEquals(coordinates, rover.getCoordinates());
@@ -16,8 +16,8 @@ class RoverTest {
 
     @Test
     void rover_create_rover_should_be_created_in_the_indicated_orientation() {
-        Coordinates coordinates = new Coordinates(0, 0);
-        Orientation orientation = Orientation.NORTH;
+        Coordinates coordinates = new Coordinates(2, 3);
+        Orientation orientation = Orientation.SOUTH;
         Rover rover = new Rover(coordinates, orientation);
         Assertions.assertNotNull(rover);
         Assertions.assertEquals(orientation, rover.getOrientation());
