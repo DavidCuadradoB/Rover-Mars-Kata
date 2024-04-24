@@ -55,6 +55,18 @@ public class Rover {
     }
 
     public Rover execute(MoveCommand command) {
-        return this.rotateLeft();
+
+        Rover moved_rover = this;
+
+        for (char c : command.getCommands().toCharArray()) {
+            if (c == 'L') {
+                moved_rover = rotateLeft();
+            } else if (c == 'R') {
+                moved_rover = rotateRight();
+            }
+        }
+
+        return moved_rover;
+
     }
 }

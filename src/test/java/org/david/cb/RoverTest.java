@@ -3,8 +3,6 @@ package org.david.cb;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.david.cb.Orientation.*;
 
 class RoverTest {
@@ -12,8 +10,7 @@ class RoverTest {
     @Test
     void rover_create_rover_should_be_created_in_the_indicated_coordinates() {
         Coordinates coordinates = new Coordinates(5, 7);
-        Orientation orientation = EAST;
-        Rover rover = new Rover(coordinates, orientation);
+        Rover rover = new Rover(coordinates, EAST);
         Assertions.assertNotNull(rover);
         Assertions.assertEquals(coordinates, rover.getCoordinates());
     }
@@ -21,8 +18,7 @@ class RoverTest {
     @Test
     void rover_execute_left_should_rotate_left() {
         Coordinates coordinates = new Coordinates(5, 7);
-        Orientation orientation = EAST;
-        Rover rover = new Rover(coordinates, orientation);
+        Rover rover = new Rover(coordinates, EAST);
 
         String commands = "L";
         MoveCommand command = new MoveCommand(commands);
@@ -86,31 +82,47 @@ class RoverTest {
     }
 
     @Test
-    void rover_orientation_north_when_rotate_right_should_rotate_east() {
+    void execute_with_right_when_the_rover_is_facing_north_the_rover_should_rotate_to_east() {
         Rover rover = getRover(NORTH);
-        Rover rotatedRover = rover.rotateRight();
-        Assertions.assertEquals(EAST, rotatedRover.getOrientation());
+        String commands = "R";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
+        Assertions.assertEquals(EAST, movedRover.getOrientation());
     }
 
     @Test
-    void rover_orientation_east_when_rotate_right_should_rotate_south() {
+    void execute_with_right_when_the_rover_is_facing_east_the_rover_should_rotate_to_south() {
         Rover rover = getRover(EAST);
-        Rover rotatedRover = rover.rotateRight();
-        Assertions.assertEquals(SOUTH, rotatedRover.getOrientation());
+        String commands = "R";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
+        Assertions.assertEquals(SOUTH, movedRover.getOrientation());
     }
 
     @Test
-    void rover_orientation_south_when_rotate_right_should_rotate_west() {
+    void execute_with_right_when_the_rover_is_facing_south_the_rover_should_rotate_to_west() {
         Rover rover = getRover(SOUTH);
-        Rover rotatedRover = rover.rotateRight();
-        Assertions.assertEquals(WEST, rotatedRover.getOrientation());
+        String commands = "R";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
+        Assertions.assertEquals(WEST, movedRover.getOrientation());
     }
 
     @Test
-    void rover_orientation_west_when_rotate_right_should_rotate_north() {
+    void execute_with_right_when_the_rover_is_facing_west_the_rover_should_rotate_to_north() {
         Rover rover = getRover(WEST);
-        Rover rotatedRover = rover.rotateRight();
-        Assertions.assertEquals(NORTH, rotatedRover.getOrientation());
+        String commands = "R";
+        MoveCommand command = new MoveCommand(commands);
+
+        Rover movedRover = rover.execute(command);
+
+        Assertions.assertEquals(NORTH, movedRover.getOrientation());
     }
 
     @Test
