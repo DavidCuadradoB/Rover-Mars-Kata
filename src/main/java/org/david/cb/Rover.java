@@ -10,42 +10,6 @@ public class Rover {
         this.orientation = orientation;
     }
 
-    public Rover moveForward() {
-        if (Orientation.NORTH == this.orientation) {
-            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() + 1), this.orientation);
-        } else if (Orientation.EAST == this.orientation) {
-            return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
-        } else if (Orientation.SOUTH == this.orientation) {
-            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() - 1), this.orientation);
-        } else {
-            return new Rover(new Coordinates(coordinates.getX() - 1, coordinates.getY()), this.orientation);
-        }
-    }
-
-    public Rover rotateRight() {
-        if (Orientation.NORTH == this.orientation) {
-            return new Rover(this.coordinates, Orientation.EAST);
-        } else if (Orientation.EAST == this.orientation) {
-            return new Rover(this.coordinates, Orientation.SOUTH);
-        } else if (Orientation.SOUTH == this.orientation) {
-            return new Rover(this.coordinates, Orientation.WEST);
-        } else {
-            return new Rover(this.coordinates, Orientation.NORTH);
-        }
-    }
-
-    public Rover rotateLeft() {
-        if (Orientation.NORTH == this.orientation) {
-            return new Rover(this.coordinates, Orientation.WEST);
-        } else if (Orientation.WEST == this.orientation) {
-            return new Rover(this.coordinates, Orientation.SOUTH);
-        } else if (Orientation.SOUTH == this.orientation) {
-            return new Rover(this.coordinates, Orientation.EAST);
-        } else {
-            return new Rover(this.coordinates, Orientation.NORTH);
-        }
-    }
-
     public Orientation getOrientation() {
         return orientation;
     }
@@ -67,8 +31,42 @@ public class Rover {
                 moved_rover = moveForward();
             }
         }
-
         return moved_rover;
+    }
 
+    private Rover moveForward() {
+        if (Orientation.NORTH == this.orientation) {
+            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() + 1), this.orientation);
+        } else if (Orientation.EAST == this.orientation) {
+            return new Rover(new Coordinates(coordinates.getX() + 1, coordinates.getY()), this.orientation);
+        } else if (Orientation.SOUTH == this.orientation) {
+            return new Rover(new Coordinates(coordinates.getX(), coordinates.getY() - 1), this.orientation);
+        } else {
+            return new Rover(new Coordinates(coordinates.getX() - 1, coordinates.getY()), this.orientation);
+        }
+    }
+
+    private Rover rotateRight() {
+        if (Orientation.NORTH == this.orientation) {
+            return new Rover(this.coordinates, Orientation.EAST);
+        } else if (Orientation.EAST == this.orientation) {
+            return new Rover(this.coordinates, Orientation.SOUTH);
+        } else if (Orientation.SOUTH == this.orientation) {
+            return new Rover(this.coordinates, Orientation.WEST);
+        } else {
+            return new Rover(this.coordinates, Orientation.NORTH);
+        }
+    }
+
+    private Rover rotateLeft() {
+        if (Orientation.NORTH == this.orientation) {
+            return new Rover(this.coordinates, Orientation.WEST);
+        } else if (Orientation.WEST == this.orientation) {
+            return new Rover(this.coordinates, Orientation.SOUTH);
+        } else if (Orientation.SOUTH == this.orientation) {
+            return new Rover(this.coordinates, Orientation.EAST);
+        } else {
+            return new Rover(this.coordinates, Orientation.NORTH);
+        }
     }
 }
