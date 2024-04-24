@@ -32,9 +32,11 @@ class RoverTest {
 
         Rover movedRover = rover.execute(command);
 
-        Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX());
-        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY() + 1);
+        Coordinates expectedCoordinates = new Coordinates(
+                rover.getCoordinates().getX(),
+                rover.getCoordinates().getY() + 1
+        );
+        Assertions.assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
     @Test
@@ -45,9 +47,11 @@ class RoverTest {
 
         Rover movedRover = rover.execute(command);
 
-        Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX() + 1);
-        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY());
+        Coordinates expectedCoordinates = new Coordinates(
+                rover.getCoordinates().getX() + 1,
+                rover.getCoordinates().getY()
+        );
+        Assertions.assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
     @Test
@@ -58,9 +62,11 @@ class RoverTest {
 
         Rover movedRover = rover.execute(command);
 
-        Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX());
-        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY() - 1);
+        Coordinates expectedCoordinates = new Coordinates(
+                rover.getCoordinates().getX(),
+                rover.getCoordinates().getY() - 1
+        );
+        Assertions.assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
     @Test
@@ -71,9 +77,11 @@ class RoverTest {
 
         Rover movedRover = rover.execute(command);
 
-        Coordinates coordinates = movedRover.getCoordinates();
-        Assertions.assertEquals(coordinates.getX(), rover.getCoordinates().getX() - 1);
-        Assertions.assertEquals(coordinates.getY(), rover.getCoordinates().getY());
+        Coordinates expectedCoordinates = new Coordinates(
+                rover.getCoordinates().getX() - 1,
+                rover.getCoordinates().getY()
+        );
+        Assertions.assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
     @Test
