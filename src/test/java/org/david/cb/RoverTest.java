@@ -1,18 +1,26 @@
 package org.david.cb;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.david.cb.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class RoverTest {
+
+    @Mock
+    private Plateau plateau;
 
     @Test
     void rover_create_rover_should_be_created_in_the_indicated_coordinates() {
         Coordinates coordinates = new Coordinates(5, 7);
-        Rover rover = new Rover(coordinates, EAST);
+        Rover rover = new Rover(coordinates, EAST, plateau);
         assertNotNull(rover);
         assertEquals(coordinates, rover.getCoordinates());
     }
@@ -21,7 +29,7 @@ class RoverTest {
     void rover_create_rover_should_be_created_in_the_indicated_orientation() {
         Coordinates coordinates = new Coordinates(2, 3);
         Orientation orientation = SOUTH;
-        Rover rover = new Rover(coordinates, orientation);
+        Rover rover = new Rover(coordinates, orientation, plateau);
         assertNotNull(rover);
         assertEquals(orientation, rover.getOrientation());
     }
@@ -201,9 +209,20 @@ class RoverTest {
         assertEquals(expectedMessage, exception.getMessage());
     }
 
+    @Test
+    void execute_should_check_if_there_are_an_obstacle_in_the_plateau() throws IncorrectCommandException {
+        Rover rover = getRover(EAST);
+        String command = "M";
+        MoveCommand commands = new MoveCommand(command);
 
-    private static Rover getRover(Orientation orientation) {
+        rover.execute(commands);
+
+        Mockito.verify(plateau).calculatePosition(rover.getCoordinates(), rover.getOrientation());
+
+    }
+
+    private Rover getRover(Orientation orientation) {
         Coordinates coordinates = new Coordinates(5, 7);
-        return new Rover(coordinates, orientation);
+        return new Rover(coordinates, orientation, plateau);
     }
 }
