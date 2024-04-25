@@ -41,31 +41,11 @@ public class Rover {
     }
 
     private Rover moveForward() {
-        if (Orientation.NORTH == this.orientation) {
-            return new Rover(
-                    plateau.calculatePosition(this.coordinates, this.orientation),
-                    this.orientation,
-                    this.plateau
-            );
-        } else if (Orientation.EAST == this.orientation) {
-            return new Rover(
-                    plateau.calculatePosition(this.coordinates, this.orientation),
-                    this.orientation,
-                    this.plateau
-            );
-        } else if (Orientation.SOUTH == this.orientation) {
-            return new Rover(
-                    plateau.calculatePosition(this.coordinates, this.orientation),
-                    this.orientation,
-                    this.plateau
-            );
-        } else {
-            return new Rover(
-                    plateau.calculatePosition(this.coordinates, this.orientation),
-                    this.orientation,
-                    this.plateau
-            );
-        }
+        return new Rover(
+                plateau.calculatePosition(this.coordinates, this.orientation),
+                this.orientation,
+                this.plateau
+        );
     }
 
     private Rover rotateRight() {

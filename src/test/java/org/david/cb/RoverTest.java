@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.david.cb.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RoverTest {
@@ -36,66 +37,17 @@ class RoverTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"M", "m"})
-    void execute_with_move_when_the_rover_is_facing_north_the_rover_should_move_to_north(String commands)
-            throws IncorrectCommandException {
-        Rover rover = getRover(NORTH);
-        MoveCommand command = new MoveCommand(commands);
-
-        Rover movedRover = rover.execute(command);
-
-        Coordinates expectedCoordinates = new Coordinates(
-                rover.getCoordinates().getX(),
-                rover.getCoordinates().getY() + 1
-        );
-        assertEquals(expectedCoordinates, movedRover.getCoordinates());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"M", "m"})
-    void execute_with_move_when_the_rover_is_facing_east_the_rover_should_move_to_east(String commands)
-            throws IncorrectCommandException {
+    void execute_should_calculatePosition_using_the_grid(String command) throws IncorrectCommandException {
         Rover rover = getRover(EAST);
-        MoveCommand command = new MoveCommand(commands);
+        MoveCommand commands = new MoveCommand(command);
 
-        Rover movedRover = rover.execute(command);
+        Coordinates expectedCoordinates = new Coordinates(1, 1);
+        when(plateau.calculatePosition(rover.getCoordinates(), rover.getOrientation())).thenReturn(expectedCoordinates);
 
-        Coordinates expectedCoordinates = new Coordinates(
-                rover.getCoordinates().getX() + 1,
-                rover.getCoordinates().getY()
-        );
-        assertEquals(expectedCoordinates, movedRover.getCoordinates());
-    }
+        Rover movedRover = rover.execute(commands);
 
-    @ParameterizedTest
-    @ValueSource(strings = {"M", "m"})
-    void execute_with_move_when_the_rover_is_facing_south_the_rover_should_move_to_south(String commands)
-            throws IncorrectCommandException {
-        Rover rover = getRover(SOUTH);
-        MoveCommand command = new MoveCommand(commands);
+        assertEquals(movedRover.getCoordinates(), expectedCoordinates);
 
-        Rover movedRover = rover.execute(command);
-
-        Coordinates expectedCoordinates = new Coordinates(
-                rover.getCoordinates().getX(),
-                rover.getCoordinates().getY() - 1
-        );
-        assertEquals(expectedCoordinates, movedRover.getCoordinates());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"M", "m"})
-    void execute_with_move_when_the_rover_is_facing_west_the_rover_should_move_to_west(String commands)
-            throws IncorrectCommandException {
-        Rover rover = getRover(WEST);
-        MoveCommand command = new MoveCommand(commands);
-
-        Rover movedRover = rover.execute(command);
-
-        Coordinates expectedCoordinates = new Coordinates(
-                rover.getCoordinates().getX() - 1,
-                rover.getCoordinates().getY()
-        );
-        assertEquals(expectedCoordinates, movedRover.getCoordinates());
     }
 
     @ParameterizedTest
@@ -207,18 +159,6 @@ class RoverTest {
         String expectedMessage = "The command : " + commands + " is not a valid character.";
 
         assertEquals(expectedMessage, exception.getMessage());
-    }
-
-    @Test
-    void execute_should_calculatePosition_using_the_grid() throws IncorrectCommandException {
-        Rover rover = getRover(EAST);
-        String command = "M";
-        MoveCommand commands = new MoveCommand(command);
-
-        rover.execute(commands);
-
-        Mockito.verify(plateau).calculatePosition(rover.getCoordinates(), rover.getOrientation());
-
     }
 
     private Rover getRover(Orientation orientation) {
