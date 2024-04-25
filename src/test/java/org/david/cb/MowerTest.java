@@ -36,7 +36,7 @@ class MowerTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"M", "m"})
-    void execute_should_calculatePosition_using_the_grid(String command) throws IncorrectCommandException {
+    void execute_should_calculatePosition_using_the_plateau(String command) throws IncorrectCommandException {
         Mower mower = getMower(EAST);
         MoveCommand commands = new MoveCommand(command);
 
