@@ -64,8 +64,25 @@ class BorderPlateauTest {
         int y = 4;
         Coordinates coordinates = new Coordinates(x, y);
 
-        Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, SOUTH );
+        Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, SOUTH);
         Coordinates expectedCoordinates = new Coordinates(x, y - 1);
+
+        assertEquals(expectedCoordinates, newCoordinates);
+    }
+
+    @Test
+    void calculatePosition_when_orientation_is_west_should_move_to_west() {
+
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        int x = 2;
+        int y = 4;
+        Coordinates coordinates = new Coordinates(x, y);
+
+        Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, WEST);
+        Coordinates expectedCoordinates = new Coordinates(x - 1, y);
 
         assertEquals(expectedCoordinates, newCoordinates);
     }
