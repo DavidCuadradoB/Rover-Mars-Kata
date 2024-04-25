@@ -13,12 +13,12 @@ public class BorderPlateau implements Plateau {
     @Override
     public Coordinates calculatePosition(Coordinates currentCoordinates, Orientation orientation) {
         if (Orientation.NORTH == orientation) {
-            if (currentCoordinates.getY() + 1 >= limitY) {
+            if (currentCoordinates.getY() + 1 > limitY) {
                 return currentCoordinates;
             }
             return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
         } else if (Orientation.EAST == orientation) {
-            if (currentCoordinates.getX() + 1 >= limitX) {
+            if (currentCoordinates.getX() + 1 > limitX) {
                 return currentCoordinates;
             }
             return new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());

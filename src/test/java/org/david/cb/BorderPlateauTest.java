@@ -1,10 +1,9 @@
 package org.david.cb;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.david.cb.Orientation.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BorderPlateauTest {
 
@@ -26,12 +25,10 @@ class BorderPlateauTest {
         int limitY = 10;
         BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
 
-        int x = 2;
-        int y = 4;
-        Coordinates coordinates = new Coordinates(x, y);
+        Coordinates coordinates = new Coordinates(limitX-1, limitY-1);
 
         Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, NORTH);
-        Coordinates expectedCoordinates = new Coordinates(x, y + 1);
+        Coordinates expectedCoordinates = new Coordinates(coordinates.getX(), coordinates.getY() + 1);
 
         assertEquals(expectedCoordinates, newCoordinates);
     }
@@ -58,12 +55,10 @@ class BorderPlateauTest {
         int limitY = 10;
         BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
 
-        int x = 2;
-        int y = 4;
-        Coordinates coordinates = new Coordinates(x, y);
+        Coordinates coordinates = new Coordinates(limitX-1, limitY-1);
 
         Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, EAST);
-        Coordinates expectedCoordinates = new Coordinates(x + 1, y);
+        Coordinates expectedCoordinates = new Coordinates(coordinates.getX() + 1, coordinates.getY());
 
         assertEquals(expectedCoordinates, newCoordinates);
     }
@@ -91,12 +86,10 @@ class BorderPlateauTest {
         int limitY = 10;
         BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
 
-        int x = 2;
-        int y = 4;
-        Coordinates coordinates = new Coordinates(x, y);
+        Coordinates coordinates = new Coordinates(1, 1);
 
         Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, SOUTH);
-        Coordinates expectedCoordinates = new Coordinates(x, y - 1);
+        Coordinates expectedCoordinates = new Coordinates(coordinates.getX(), coordinates.getY() - 1);
 
         assertEquals(expectedCoordinates, newCoordinates);
     }
@@ -123,12 +116,10 @@ class BorderPlateauTest {
         int limitY = 10;
         BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
 
-        int x = 2;
-        int y = 4;
-        Coordinates coordinates = new Coordinates(x, y);
+        Coordinates coordinates = new Coordinates(1, 1);
 
         Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, WEST);
-        Coordinates expectedCoordinates = new Coordinates(x - 1, y);
+        Coordinates expectedCoordinates = new Coordinates(coordinates.getX() - 1, coordinates.getY());
 
         assertEquals(expectedCoordinates, newCoordinates);
     }
