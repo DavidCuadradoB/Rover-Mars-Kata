@@ -16,6 +16,8 @@ public class BorderPlateau implements Plateau {
             return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
         } else if (Orientation.EAST == orientation) {
             return new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
+        } else if (Orientation.SOUTH == orientation) {
+            return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
         }
 
         return null;
