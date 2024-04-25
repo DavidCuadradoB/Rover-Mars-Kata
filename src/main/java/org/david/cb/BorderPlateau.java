@@ -28,6 +28,9 @@ public class BorderPlateau implements Plateau {
             }
             return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
         } else {
+            if (currentCoordinates.getX() - 1 < 0) {
+                return currentCoordinates;
+            }
             return new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
         }
     }

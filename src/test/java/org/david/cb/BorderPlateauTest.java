@@ -124,4 +124,19 @@ class BorderPlateauTest {
         assertEquals(expectedCoordinates, newCoordinates);
     }
 
+    @Test
+    void calculatePosition_when_orientation_is_west_but_is_in_the_border_should_no_move_to_west() {
+
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        int y = 4;
+        Coordinates coordinates = new Coordinates(0, y);
+
+        Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, WEST);
+
+        assertEquals(coordinates, newCoordinates);
+    }
+
 }
