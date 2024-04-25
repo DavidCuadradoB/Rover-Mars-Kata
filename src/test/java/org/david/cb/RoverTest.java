@@ -210,7 +210,7 @@ class RoverTest {
     }
 
     @Test
-    void execute_should_check_if_there_are_an_obstacle_in_the_plateau() throws IncorrectCommandException {
+    void execute_should_calculatePosition_using_the_grid() throws IncorrectCommandException {
         Rover rover = getRover(EAST);
         String command = "M";
         MoveCommand commands = new MoveCommand(command);
