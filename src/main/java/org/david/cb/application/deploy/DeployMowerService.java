@@ -26,7 +26,11 @@ public class DeployMowerService implements DeployService {
     }
 
     @Override
-    public void deploy() throws IncorrectCommandException, IncorrectCommandForPlateauLimitsException {
+    public void deploy() throws
+            IncorrectCommandException,
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectCommandForMowerInitialPositionException
+    {
 
         Plateau plateau = getPlateau();
 
@@ -48,7 +52,7 @@ public class DeployMowerService implements DeployService {
 
     }
 
-    private Mower getMower(Plateau plateau) {
+    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException {
         String mowerInitialPosition = commandReader.readCommand();
         String regexMowerInitialPosition = "(\\d) (\\d) (\\w)";
 
@@ -63,7 +67,7 @@ public class DeployMowerService implements DeployService {
 
             return new Mower(initialCoordinates, Orientation.NORTH, plateau);
         }
-        return null;
+        throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
     }
 
     private Plateau getPlateau() throws IncorrectCommandForPlateauLimitsException {
