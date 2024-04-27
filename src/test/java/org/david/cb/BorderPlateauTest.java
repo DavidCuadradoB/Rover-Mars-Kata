@@ -247,4 +247,17 @@ class BorderPlateauTest {
 
         assertFalse(checkedCoordinates);
     }
+
+    @Test
+    void checkCoordinates_should_return_false_if_coordinates_are_outside_west_of_plateau() {
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        Coordinates coordinates = new Coordinates(-1, 0);
+
+        boolean checkedCoordinates = borderPlateau.checkCoordinates(coordinates);
+
+        assertFalse(checkedCoordinates);
+    }
 }

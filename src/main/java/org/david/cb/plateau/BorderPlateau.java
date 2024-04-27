@@ -40,7 +40,12 @@ public class BorderPlateau implements Plateau {
 
     @Override
     public boolean checkCoordinates(Coordinates coordinates) {
-        if (coordinates.getX() > eastLimit || coordinates.getY() > northLimit || SOUTH_LIMIT > coordinates.getY()) {
+        if (
+                coordinates.getX() > eastLimit ||
+                coordinates.getY() > northLimit ||
+                SOUTH_LIMIT > coordinates.getY() ||
+                WEST_LIMIT > coordinates.getX()
+        ) {
             return false;
         }
         return true;
