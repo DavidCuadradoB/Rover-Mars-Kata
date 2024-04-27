@@ -1,8 +1,9 @@
 package org.david.cb;
 
+import org.david.cb.plateau.BorderPlateau;
 import org.junit.jupiter.api.Test;
 
-import static org.david.cb.Orientation.*;
+import static org.david.cb.mower.Orientation.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BorderPlateauTest {
