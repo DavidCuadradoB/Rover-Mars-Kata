@@ -1,4 +1,4 @@
-package org.david.cb.deploy.command;
+package org.david.cb.application.deploy.command;
 
 public class PlateauLimitsCommand {
 

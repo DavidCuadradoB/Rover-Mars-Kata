@@ -1,4 +1,4 @@
-package org.david.cb.deploy;
+package org.david.cb.application.deploy;
 
 import org.david.cb.Coordinates;
 import org.david.cb.commandreader.CommandReader;
@@ -26,7 +26,7 @@ public class DeployMowerService implements DeployService {
     }
 
     @Override
-    public void deploy() throws IncorrectCommandException {
+    public void deploy() throws IncorrectCommandException, IncorrectCommandForPlateauLimitsException {
 
         Plateau plateau = getPlateau();
 
@@ -66,7 +66,7 @@ public class DeployMowerService implements DeployService {
         return null;
     }
 
-    private Plateau getPlateau() {
+    private Plateau getPlateau() throws IncorrectCommandForPlateauLimitsException {
         String plateauLimitsRaw = commandReader.readCommand();
         String regexPlateauLimits = "(\\d) (\\d)";
 
@@ -78,7 +78,8 @@ public class DeployMowerService implements DeployService {
                     Integer.parseInt(matcherPlateauLimits.group(1)),
                     Integer.parseInt(matcherPlateauLimits.group(2))
             );
+        } else {
+            throw new IncorrectCommandForPlateauLimitsException(plateauLimitsRaw);
         }
-        return null;
     }
 }
