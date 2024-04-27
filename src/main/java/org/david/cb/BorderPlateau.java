@@ -5,42 +5,28 @@ import java.util.List;
 
 public class BorderPlateau implements Plateau {
 
-    private final int limitX;
-    private final int limitY;
+    public static final int BOTTOM_LIMIT = 0;
+    public static final int LEFT_LIMIT = 0;
+    private final int leftLimit;
+    private final int topLimit;
 
     private final List<Coordinates> obstacles = new ArrayList<>();
 
-    public BorderPlateau(int limitX, int limitY) {
-        this.limitX = limitX;
-        this.limitY = limitY;
+    public BorderPlateau(int leftLimit, int topLimit) {
+        this.leftLimit = leftLimit;
+        this.topLimit = topLimit;
     }
 
     @Override
     public Coordinates calculatePosition(Coordinates currentCoordinates, Orientation orientation) {
         if (Orientation.NORTH == orientation) {
-            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
-            if (targetCoordinates.getY() > limitY || this.obstacles.contains(targetCoordinates)) {
-                return currentCoordinates;
-            }
-            return targetCoordinates;
+            return getCoordinatesFacingNorth(currentCoordinates);
         } else if (Orientation.EAST == orientation) {
-            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
-            if (targetCoordinates.getX() > limitX || this.obstacles.contains(targetCoordinates)) {
-                return currentCoordinates;
-            }
-            return targetCoordinates;
+            return getCoordinatesFacingEast(currentCoordinates);
         } else if (Orientation.SOUTH == orientation) {
-            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
-            if (currentCoordinates.getY() - 1 < 0 || this.obstacles.contains(targetCoordinates)) {
-                return currentCoordinates;
-            }
-            return targetCoordinates;
+            return getCoordinatesFacingSouth(currentCoordinates);
         } else {
-            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
-            if (currentCoordinates.getX() - 1 < 0 || this.obstacles.contains(targetCoordinates)) {
-                return currentCoordinates;
-            }
-            return targetCoordinates;
+            return getCoordinatesFacingWest(currentCoordinates);
         }
     }
 
@@ -49,11 +35,36 @@ public class BorderPlateau implements Plateau {
         this.obstacles.add(coordinates);
     }
 
-    public int getLimitX() {
-        return limitX;
+    private Coordinates getCoordinatesFacingWest(Coordinates currentCoordinates) {
+        Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
+        if (targetCoordinates.getX() < BOTTOM_LIMIT || this.obstacles.contains(targetCoordinates)) {
+            return currentCoordinates;
+        }
+        return targetCoordinates;
     }
 
-    public int getLimitY() {
-        return limitY;
+    private Coordinates getCoordinatesFacingSouth(Coordinates currentCoordinates) {
+        Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
+        if (targetCoordinates.getY() < LEFT_LIMIT || this.obstacles.contains(targetCoordinates)) {
+            return currentCoordinates;
+        }
+        return targetCoordinates;
     }
+
+    private Coordinates getCoordinatesFacingEast(Coordinates currentCoordinates) {
+        Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
+        if (targetCoordinates.getX() > this.leftLimit || this.obstacles.contains(targetCoordinates)) {
+            return currentCoordinates;
+        }
+        return targetCoordinates;
+    }
+
+    private Coordinates getCoordinatesFacingNorth(Coordinates currentCoordinates) {
+        Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
+        if (targetCoordinates.getY() > this.topLimit || this.obstacles.contains(targetCoordinates)) {
+            return currentCoordinates;
+        }
+        return targetCoordinates;
+    }
+
 }

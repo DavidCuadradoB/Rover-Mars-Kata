@@ -8,17 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BorderPlateauTest {
 
     @Test
-    void create_borderPlateau_should_determinate_the_limits() {
-        int limitX = 5;
-        int limitY = 10;
-
-        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
-
-        assertEquals(limitX, borderPlateau.getLimitX());
-        assertEquals(limitY, borderPlateau.getLimitY());
-    }
-
-    @Test
     void calculatePosition_when_orientation_is_north_should_move_to_north() {
 
         int limitX = 5;
