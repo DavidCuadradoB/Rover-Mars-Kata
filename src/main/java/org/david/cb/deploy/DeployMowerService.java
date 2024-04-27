@@ -1,15 +1,17 @@
 package org.david.cb.deploy;
 
 import org.david.cb.Coordinates;
-import org.david.cb.MoveCommand;
 import org.david.cb.commandreader.CommandReader;
 import org.david.cb.commandwriter.PositionWriter;
 import org.david.cb.mower.IncorrectCommandException;
 import org.david.cb.mower.Mower;
+import org.david.cb.mower.MowerCommand;
 import org.david.cb.mower.Orientation;
 import org.david.cb.plateau.BorderPlateau;
 import org.david.cb.plateau.Plateau;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,8 +32,13 @@ public class DeployMowerService implements DeployService {
 
         Mower mower = getMower(plateau);
 
-        String mowerMovement = commandReader.readCommand();
-        Mower movedMower = mower.execute(new MoveCommand(mowerMovement));
+        List<MowerCommand> mowerCommands = new ArrayList<>();
+
+        for (char c : commandReader.readCommand().toCharArray()) {
+            mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
+        }
+
+        Mower movedMower = mower.execute(mowerCommands);
 
         positionWriter.write(
                 movedMower.getCoordinates().getX() + " " +

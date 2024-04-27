@@ -1,9 +1,9 @@
 package org.david.cb.mower;
 
-import org.david.cb.*;
+import org.david.cb.Coordinates;
 import org.david.cb.plateau.Plateau;
 
-import java.util.Optional;
+import java.util.List;
 
 public class Mower {
 
@@ -25,15 +25,11 @@ public class Mower {
         return coordinates;
     }
 
-    public Mower execute(MoveCommand commands) throws IncorrectCommandException {
+    public Mower execute(List<MowerCommand> commands) throws IncorrectCommandException {
 
         Mower moved_mower = this;
 
-        for (char c : commands.getCommands().toCharArray()) {
-            Optional<MowerCommand> mowerCommand = MowerCommand.fromChar(Character.toUpperCase(c));
-
-            MowerCommand command = mowerCommand.orElseThrow(() -> new IncorrectCommandException(c));
-
+        for (MowerCommand command : commands) {
             if (MowerCommand.ROTATE_LEFT.equals(command)) {
                 moved_mower = rotateLeft();
             } else if (MowerCommand.ROTATE_RIGHT.equals(command)) {
