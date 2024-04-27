@@ -2,11 +2,8 @@ package org.david.cb.application.newmissionusecase;
 
 import org.david.cb.application.deploy.CreatePlateauService;
 import org.david.cb.application.deploy.DeployMowerService;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.CommandReader;
-import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.Plateau;
 
 public class NewMissionUseCase {
@@ -25,11 +22,7 @@ public class NewMissionUseCase {
         this.commandReader = commandReader;
     }
 
-    public void execute() throws
-            IncorrectCommandForPlateauLimitsException,
-            IncorrectInitialCoordinatesException,
-            IncorrectCommandForMowerInitialPositionException,
-            IncorrectCommandException
+    public void execute() throws IncorrectCommandForPlateauLimitsException
     {
 
         Plateau plateau = createPlateauService.createPlateau();

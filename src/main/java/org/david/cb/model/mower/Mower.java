@@ -31,7 +31,7 @@ public class Mower {
         return coordinates;
     }
 
-    public Mower execute(List<MowerCommand> commands) throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+    public Mower execute(List<MowerCommand> commands) throws IncorrectInitialCoordinatesException {
 
         Mower moved_mower = this;
 
