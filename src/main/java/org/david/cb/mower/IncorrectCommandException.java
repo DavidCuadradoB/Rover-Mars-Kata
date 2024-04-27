@@ -1,4 +1,4 @@
-package org.david.cb;
+package org.david.cb.mower;
 
 public class IncorrectCommandException extends Exception {
     public IncorrectCommandException(Character character) {

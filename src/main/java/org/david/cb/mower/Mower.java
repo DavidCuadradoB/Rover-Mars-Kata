@@ -1,4 +1,7 @@
-package org.david.cb;
+package org.david.cb.mower;
+
+import org.david.cb.*;
+import org.david.cb.plateau.Plateau;
 
 import java.util.Optional;
 

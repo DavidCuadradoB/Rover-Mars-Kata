@@ -1,4 +1,7 @@
-package org.david.cb;
+package org.david.cb.plateau;
+
+import org.david.cb.Coordinates;
+import org.david.cb.mower.Orientation;
 
 import java.util.ArrayList;
 import java.util.List;
