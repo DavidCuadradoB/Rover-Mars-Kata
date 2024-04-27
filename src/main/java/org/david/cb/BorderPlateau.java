@@ -24,10 +24,11 @@ public class BorderPlateau implements Plateau {
             }
             return targetCoordinates;
         } else if (Orientation.EAST == orientation) {
-            if (currentCoordinates.getX() + 1 > limitX) {
+            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
+            if (targetCoordinates.getX() > limitX || this.obstacles.contains(targetCoordinates)) {
                 return currentCoordinates;
             }
-            return new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
+            return targetCoordinates;
         } else if (Orientation.SOUTH == orientation) {
             if (currentCoordinates.getY() - 1 < 0) {
                 return currentCoordinates;
