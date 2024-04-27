@@ -1,8 +1,10 @@
 package org.david.cb.deploy;
 
+import org.david.cb.mower.IncorrectCommandException;
+
 public interface DeployService {
 
 
-    public void deploy();
+    void deploy() throws IncorrectCommandException;
 
 }

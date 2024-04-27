@@ -1,8 +1,8 @@
 package org.david.cb.infrastructure.commandwritter;
 
-import org.david.cb.commandwriter.CommandWriter;
+import org.david.cb.commandwriter.PositionWriter;
 
-public class TerminalCommandWriter implements CommandWriter {
+public class TerminalPositionWriter implements PositionWriter {
 
     @Override
     public void write(String position) {
