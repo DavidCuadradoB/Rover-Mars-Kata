@@ -5,6 +5,7 @@ import org.david.cb.model.mower.Orientation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BorderPlateau implements Plateau {
 
@@ -84,4 +85,16 @@ public class BorderPlateau implements Plateau {
         return targetCoordinates;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BorderPlateau that = (BorderPlateau) o;
+        return eastLimit == that.eastLimit && northLimit == that.northLimit && Objects.equals(obstacles, that.obstacles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eastLimit, northLimit, obstacles);
+    }
 }
