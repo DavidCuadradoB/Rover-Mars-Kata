@@ -1,10 +1,7 @@
 package org.david.cb.application.deploy;
 
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.CommandReader;
-import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class CreatePlateauServiceTest {

@@ -24,7 +24,7 @@ class TerminalCommandReaderTest {
     @Test
     void readCommand_should_return_a_string_read_from_scanner() {
         String expectedCommand = "ABC";
-        Mockito.when(scanner.next()).thenReturn(expectedCommand);
+        Mockito.when(scanner.nextLine()).thenReturn(expectedCommand);
 
         String command = terminalCommandReader.readCommand();
 

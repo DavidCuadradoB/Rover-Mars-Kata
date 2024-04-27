@@ -28,13 +28,6 @@ public class DeployMowerService  {
         this.positionWriter = positionWriter;
     }
 
-    public void deploy() throws
-            IncorrectCommandException,
-            IncorrectCommandForMowerInitialPositionException,
-            IncorrectInitialCoordinatesException
-    {
-
-    }
     public void deploy(Plateau plateau) throws
             IncorrectCommandException,
             IncorrectCommandForMowerInitialPositionException,
