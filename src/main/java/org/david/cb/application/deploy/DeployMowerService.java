@@ -15,11 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeployMowerService  {
 
+    public static final String REGEX_MOWER_INITIAL_POSITION = "(\\d) (\\d) (\\w)";
     private final CommandReader commandReader;
     private final PositionWriter positionWriter;
     Logger logger = LoggerFactory.getLogger(DeployMowerService.class);
@@ -29,7 +31,7 @@ public class DeployMowerService  {
         this.positionWriter = positionWriter;
     }
 
-    public void deploy(Plateau plateau) {
+    public Optional<Mower> deploy(Plateau plateau) {
 
         try {
             Mower mower = getMower(plateau);
@@ -37,17 +39,15 @@ public class DeployMowerService  {
             getMowerCommandFromString(mowerCommands);
             Mower movedMower = mower.execute(mowerCommands);
 
-            positionWriter.write(
-                    movedMower.getCoordinates().getX() + " " +
-                            movedMower.getCoordinates().getY() + " " +
-                            movedMower.getOrientation().abbreviation
-            );
+            return Optional.of(movedMower);
+
         } catch (IncorrectCommandForMowerInitialPositionException | IncorrectInitialCoordinatesException exception) {
             logger.error("Impossible to deploy the mower into the plateau", exception);
+            return Optional.empty();
         } catch (IncorrectCommandException exception) {
             logger.error("Impossible to move the mower", exception);
+            return Optional.empty();
         }
-
     }
 
     private void getMowerCommandFromString(List<MowerCommand> mowerCommands) throws IncorrectCommandException {
@@ -58,10 +58,7 @@ public class DeployMowerService  {
 
     private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
         String mowerInitialPosition = commandReader.readCommand("Introduce the mower initial values");
-        String regexMowerInitialPosition = "(\\d) (\\d) (\\w)";
-
-        Pattern patternMowerInitialPosition = Pattern.compile(regexMowerInitialPosition);
-        Matcher matcherMowerInitialPosition = patternMowerInitialPosition.matcher(mowerInitialPosition);
+        Matcher matcherMowerInitialPosition = Pattern.compile(REGEX_MOWER_INITIAL_POSITION).matcher(mowerInitialPosition);
 
         if (matcherMowerInitialPosition.find()) {
             Coordinates initialCoordinates = new Coordinates(

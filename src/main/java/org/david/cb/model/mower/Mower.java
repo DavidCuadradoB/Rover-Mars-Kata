@@ -6,6 +6,7 @@ import org.david.cb.model.plateau.Plateau;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Mower {
 
@@ -79,5 +80,18 @@ public class Mower {
         } else {
             return new Mower(this.coordinates, Orientation.NORTH, this.plateau);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mower mower = (Mower) o;
+        return Objects.equals(coordinates, mower.coordinates) && orientation == mower.orientation && Objects.equals(plateau, mower.plateau);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coordinates, orientation, plateau);
     }
 }

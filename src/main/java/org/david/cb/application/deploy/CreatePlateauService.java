@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 public class CreatePlateauService {
 
+    public static final String REGEX_PLATEAU_LIMITS = "(\\d) (\\d)";
     private final CommandReader commandReader;
 
     public CreatePlateauService(CommandReader commandReader) {
@@ -18,10 +19,7 @@ public class CreatePlateauService {
 
     public Plateau createPlateau() throws IncorrectCommandForPlateauLimitsException {
         String plateauLimitsRaw = commandReader.readCommand("Introduce the plateau limits: ");
-        String regexPlateauLimits = "(\\d) (\\d)";
-
-        Pattern patternPlateauLimits = Pattern.compile(regexPlateauLimits);
-        Matcher matcherPlateauLimits = patternPlateauLimits.matcher(plateauLimitsRaw);
+        Matcher matcherPlateauLimits = Pattern.compile(REGEX_PLATEAU_LIMITS).matcher(plateauLimitsRaw);
 
         if (matcherPlateauLimits.find()) {
             return new BorderPlateau(

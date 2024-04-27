@@ -16,8 +16,12 @@ public class Main {
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();
         DeployMowerService deployMowerService = new DeployMowerService(terminalCommandReader, terminalPositionWriter);
         CreatePlateauService createPlateauService = new CreatePlateauService(terminalCommandReader);
-        NewMissionUseCase newMissionUseCase =
-                new NewMissionUseCase(createPlateauService, deployMowerService, terminalCommandReader);
+        NewMissionUseCase newMissionUseCase = new NewMissionUseCase(
+                createPlateauService,
+                deployMowerService,
+                terminalCommandReader,
+                terminalPositionWriter
+        );
 
         newMissionUseCase.execute();
     }
