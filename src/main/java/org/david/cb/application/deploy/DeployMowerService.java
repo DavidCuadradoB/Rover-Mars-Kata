@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeployMowerService implements DeployService {
+public class DeployMowerService  {
 
     private final CommandReader commandReader;
     private final PositionWriter positionWriter;
@@ -28,7 +28,6 @@ public class DeployMowerService implements DeployService {
         this.positionWriter = positionWriter;
     }
 
-    @Override
     public void deploy() throws
             IncorrectCommandException,
             IncorrectCommandForPlateauLimitsException,
@@ -37,22 +36,23 @@ public class DeployMowerService implements DeployService {
     {
 
         Plateau plateau = getPlateau();
+        while (true) {
+            Mower mower = getMower(plateau);
+            List<MowerCommand> mowerCommands = new ArrayList<>();
 
-        Mower mower = getMower(plateau);
+            for (char c : commandReader.readCommand().toCharArray()) {
+                mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
+            }
 
-        List<MowerCommand> mowerCommands = new ArrayList<>();
+            Mower movedMower = mower.execute(mowerCommands);
 
-        for (char c : commandReader.readCommand().toCharArray()) {
-            mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
+            positionWriter.write(
+                    movedMower.getCoordinates().getX() + " " +
+                            movedMower.getCoordinates().getY() + " " +
+                            movedMower.getOrientation().abbreviation
+            );
         }
 
-        Mower movedMower = mower.execute(mowerCommands);
-
-        positionWriter.write(
-                movedMower.getCoordinates().getX() + " " +
-                        movedMower.getCoordinates().getY() + " " +
-                        movedMower.getOrientation().abbreviation
-        );
 
     }
 
