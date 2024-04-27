@@ -1,6 +1,6 @@
 package org.david.cb.infrastructure.commandreader;
 
-import org.david.cb.commandreader.CommandReader;
+import org.david.cb.model.commandreader.CommandReader;
 
 import java.util.Scanner;
 

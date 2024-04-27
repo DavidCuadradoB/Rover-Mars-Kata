@@ -4,12 +4,12 @@ import org.david.cb.model.Coordinates;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
-import org.david.cb.commandreader.CommandReader;
-import org.david.cb.commandwriter.PositionWriter;
+import org.david.cb.model.commandreader.CommandReader;
+import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.MowerCommand;
 import org.david.cb.model.mower.Orientation;
-import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
+import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
 
@@ -32,31 +32,29 @@ public class DeployMowerService  {
             IncorrectCommandException,
             IncorrectCommandForPlateauLimitsException,
             IncorrectCommandForMowerInitialPositionException,
-            IncorrectInitialPositionException
+            IncorrectInitialCoordinatesException
     {
 
         Plateau plateau = getPlateau();
-        while (true) {
-            Mower mower = getMower(plateau);
-            List<MowerCommand> mowerCommands = new ArrayList<>();
+        Mower mower = getMower(plateau);
+        List<MowerCommand> mowerCommands = new ArrayList<>();
 
-            for (char c : commandReader.readCommand().toCharArray()) {
-                mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
-            }
-
-            Mower movedMower = mower.execute(mowerCommands);
-
-            positionWriter.write(
-                    movedMower.getCoordinates().getX() + " " +
-                            movedMower.getCoordinates().getY() + " " +
-                            movedMower.getOrientation().abbreviation
-            );
+        for (char c : commandReader.readCommand().toCharArray()) {
+            mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
+
+        Mower movedMower = mower.execute(mowerCommands);
+
+        positionWriter.write(
+                movedMower.getCoordinates().getX() + " " +
+                        movedMower.getCoordinates().getY() + " " +
+                        movedMower.getOrientation().abbreviation
+        );
 
 
     }
 
-    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialPositionException {
+    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
         String mowerInitialPosition = commandReader.readCommand();
         String regexMowerInitialPosition = "(\\d) (\\d) (\\w)";
 

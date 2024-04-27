@@ -1,4 +1,4 @@
-package org.david.cb.commandreader;
+package org.david.cb.model.commandreader;
 
 public interface CommandReader {
 

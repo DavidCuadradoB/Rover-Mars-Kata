@@ -1,6 +1,6 @@
 package org.david.cb.infrastructure.commandwritter;
 
-import org.david.cb.commandwriter.PositionWriter;
+import org.david.cb.model.commandwriter.PositionWriter;
 
 public class TerminalPositionWriter implements PositionWriter {
 

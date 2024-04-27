@@ -1,4 +1,4 @@
-package org.david.cb.commandwriter;
+package org.david.cb.model.commandwriter;
 
 public interface PositionWriter {
 

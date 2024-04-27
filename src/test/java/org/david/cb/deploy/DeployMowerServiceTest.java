@@ -3,10 +3,10 @@ package org.david.cb.deploy;
 import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
-import org.david.cb.commandreader.CommandReader;
-import org.david.cb.commandwriter.PositionWriter;
+import org.david.cb.model.commandreader.CommandReader;
+import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
+import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +35,7 @@ class DeployMowerServiceTest {
             IncorrectCommandException,
             IncorrectCommandForPlateauLimitsException,
             IncorrectCommandForMowerInitialPositionException,
-            IncorrectInitialPositionException {
+            IncorrectInitialCoordinatesException {
         String plateauSize = "5 5";
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "LMLMLMLMM";
