@@ -36,7 +36,8 @@ public class NewMissionUseCase {
             Plateau plateau = createPlateauService.createPlateau();
             deployMowerService.deploy(plateau);
         } while(
-                !commandReader.readCommand().equals("exit")
+                !commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower")
+                        .equals("exit")
         );
 
     }

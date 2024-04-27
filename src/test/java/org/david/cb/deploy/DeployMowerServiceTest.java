@@ -40,7 +40,10 @@ class DeployMowerServiceTest {
         String mowerMovement = "LMLMLMLMM";
         String expectedPosition = "1 3 N";
 
-        Mockito.when(commandReader.readCommand()).thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
 
         deployMowerService.deploy(new BorderPlateau(5, 5));
 
@@ -53,7 +56,10 @@ class DeployMowerServiceTest {
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "MMR/RR";
 
-        Mockito.when(commandReader.readCommand()).thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
 
         IncorrectCommandException exception = assertThrows(
                 IncorrectCommandException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))
@@ -70,7 +76,10 @@ class DeployMowerServiceTest {
         String mowerInitialPosition = "a a N";
         String mowerMovement = "MMRRR";
 
-        Mockito.when(commandReader.readCommand()).thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
 
         IncorrectCommandForMowerInitialPositionException exception = assertThrows(
                 IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))
@@ -86,7 +95,10 @@ class DeployMowerServiceTest {
         String mowerInitialPosition = "1 4 J";
         String mowerMovement = "MMRRR";
 
-        Mockito.when(commandReader.readCommand()).thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
+        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
+                .thenReturn(mowerInitialPosition, mowerMovement);
 
         IncorrectCommandForMowerInitialPositionException exception = assertThrows(
                 IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))

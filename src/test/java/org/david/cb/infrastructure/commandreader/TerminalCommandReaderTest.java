@@ -26,7 +26,7 @@ class TerminalCommandReaderTest {
         String expectedCommand = "ABC";
         Mockito.when(scanner.nextLine()).thenReturn(expectedCommand);
 
-        String command = terminalCommandReader.readCommand();
+        String command = terminalCommandReader.readCommand("a question");
 
         Assertions.assertEquals(command, expectedCommand);
 
