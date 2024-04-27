@@ -67,7 +67,10 @@ public class DeployMowerService implements DeployService {
                     Integer.parseInt(matcherMowerInitialPosition.group(2))
             );
 
-            return new Mower(initialCoordinates, Orientation.NORTH, plateau);
+            Orientation orientation = Orientation.forAbbreviation(matcherMowerInitialPosition.group(3))
+                    .orElseThrow(() -> new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition));
+
+            return new Mower(initialCoordinates, orientation, plateau);
         }
         throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
     }

@@ -78,15 +78,15 @@ class DeployMowerServiceTest {
                 IncorrectCommandForPlateauLimitsException.class, () -> deployMowerService.deploy()
         );
 
-        String expectedMessage = "The command: a 5 is not a valid command for plateau limits.";
+        String expectedMessage = "The command: a a is not a valid command for plateau limits.";
 
         Assertions.assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
-    void deploy_should_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_plateauSize_has_incorrect_command() {
+    void deploy_should_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_mower_initial_position_has_incorrect_command() {
         String plateauSize = "5 5";
-        String mowerInitialPosition = "a a J";
+        String mowerInitialPosition = "a a N";
         String mowerMovement = "MMRRR";
 
         Mockito.when(commandReader.readCommand()).thenReturn(plateauSize, mowerInitialPosition, mowerMovement);
@@ -95,7 +95,24 @@ class DeployMowerServiceTest {
                 IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy()
         );
 
-        String expectedMessage = "The command: a a J is not a valid command for mower initial position.";
+        String expectedMessage = "The command: a a N is not a valid command for mower initial position.";
+
+        Assertions.assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void deploy_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_Orientation_is_incorrect() {
+        String plateauSize = "5 5";
+        String mowerInitialPosition = "1 4 J";
+        String mowerMovement = "MMRRR";
+
+        Mockito.when(commandReader.readCommand()).thenReturn(plateauSize, mowerInitialPosition, mowerMovement);
+
+        IncorrectCommandForMowerInitialPositionException exception = assertThrows(
+                IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy()
+        );
+
+        String expectedMessage = "The command: 1 4 J is not a valid command for mower initial position.";
 
         Assertions.assertEquals(expectedMessage, exception.getMessage());
     }
