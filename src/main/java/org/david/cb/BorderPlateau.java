@@ -30,10 +30,11 @@ public class BorderPlateau implements Plateau {
             }
             return targetCoordinates;
         } else if (Orientation.SOUTH == orientation) {
-            if (currentCoordinates.getY() - 1 < 0) {
+            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
+            if (currentCoordinates.getY() - 1 < 0 || this.obstacles.contains(targetCoordinates)) {
                 return currentCoordinates;
             }
-            return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
+            return targetCoordinates;
         } else {
             if (currentCoordinates.getX() - 1 < 0) {
                 return currentCoordinates;
