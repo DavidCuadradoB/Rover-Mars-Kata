@@ -273,4 +273,19 @@ class BorderPlateauTest {
 
         assertFalse(checkedCoordinates);
     }
+
+    @Test
+    void checkCoordinates_should_return_false_if_coordinates_are_in_an_obstacle() {
+        int limitX = 5;
+        int limitY = 10;
+
+        Coordinates coordinates = new Coordinates(2, 3);
+
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+        borderPlateau.addObstacle(coordinates);
+
+        boolean checkedCoordinates = borderPlateau.checkCoordinates(coordinates);
+
+        assertFalse(checkedCoordinates);
+    }
 }

@@ -44,7 +44,8 @@ public class BorderPlateau implements Plateau {
                 coordinates.getX() > eastLimit ||
                 coordinates.getY() > northLimit ||
                 SOUTH_LIMIT > coordinates.getY() ||
-                WEST_LIMIT > coordinates.getX()
+                WEST_LIMIT > coordinates.getX() ||
+                obstacles.contains(coordinates)
         ) {
             return false;
         }
