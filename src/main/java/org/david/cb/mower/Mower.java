@@ -2,6 +2,7 @@ package org.david.cb.mower;
 
 import org.david.cb.Coordinates;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
+import org.david.cb.mower.exception.IncorrectInitialPositionException;
 import org.david.cb.plateau.Plateau;
 
 import java.util.List;
@@ -12,10 +13,14 @@ public class Mower {
     private final Orientation orientation;
     private final Plateau plateau;
 
-    public Mower(Coordinates coordinates, Orientation orientation, Plateau plateau) {
-        this.coordinates = coordinates;
-        this.orientation = orientation;
-        this.plateau = plateau;
+    public Mower(Coordinates coordinates, Orientation orientation, Plateau plateau) throws IncorrectInitialPositionException {
+        if (plateau.checkCoordinates(coordinates)) {
+            this.coordinates = coordinates;
+            this.orientation = orientation;
+            this.plateau = plateau;
+        } else {
+            throw new IncorrectInitialPositionException(coordinates.getX(), coordinates.getY());
+        }
     }
 
     public Orientation getOrientation() {
@@ -26,7 +31,7 @@ public class Mower {
         return coordinates;
     }
 
-    public Mower execute(List<MowerCommand> commands) throws IncorrectCommandException {
+    public Mower execute(List<MowerCommand> commands) throws IncorrectCommandException, IncorrectInitialPositionException {
 
         Mower moved_mower = this;
 
@@ -44,7 +49,7 @@ public class Mower {
         return moved_mower;
     }
 
-    private Mower moveForward() {
+    private Mower moveForward() throws IncorrectInitialPositionException {
         return new Mower(
                 plateau.calculatePosition(this.coordinates, this.orientation),
                 this.orientation,
@@ -52,7 +57,7 @@ public class Mower {
         );
     }
 
-    private Mower rotateRight() {
+    private Mower rotateRight() throws IncorrectInitialPositionException {
         if (Orientation.NORTH == this.orientation) {
             return new Mower(this.coordinates, Orientation.EAST, this.plateau);
         } else if (Orientation.EAST == this.orientation) {
@@ -64,7 +69,7 @@ public class Mower {
         }
     }
 
-    private Mower rotateLeft() {
+    private Mower rotateLeft() throws IncorrectInitialPositionException {
         if (Orientation.NORTH == this.orientation) {
             return new Mower(this.coordinates, Orientation.WEST, this.plateau);
         } else if (Orientation.WEST == this.orientation) {

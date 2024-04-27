@@ -38,6 +38,11 @@ public class BorderPlateau implements Plateau {
         this.obstacles.add(coordinates);
     }
 
+    @Override
+    public boolean checkCoordinates(Coordinates coordinates) {
+        return false;
+    }
+
     private Coordinates getCoordinatesFacingWest(Coordinates currentCoordinates) {
         Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
         if (targetCoordinates.getX() < BOTTOM_LIMIT || this.obstacles.contains(targetCoordinates)) {

@@ -6,6 +6,7 @@ import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimi
 import org.david.cb.commandreader.CommandReader;
 import org.david.cb.commandwriter.PositionWriter;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
+import org.david.cb.mower.exception.IncorrectInitialPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +34,8 @@ class DeployMowerServiceTest {
     void deploy_should_create_a_plateau_with_the_values_get_from_command_reader() throws
             IncorrectCommandException,
             IncorrectCommandForPlateauLimitsException,
-            IncorrectCommandForMowerInitialPositionException
-    {
+            IncorrectCommandForMowerInitialPositionException,
+            IncorrectInitialPositionException {
         String plateauSize = "5 5";
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "LMLMLMLMM";

@@ -8,4 +8,6 @@ public interface Plateau {
     Coordinates calculatePosition(Coordinates currentCoordinates, Orientation orientation);
 
     void addObstacle(Coordinates coordinates);
+
+    boolean checkCoordinates(Coordinates coordinates);
 }

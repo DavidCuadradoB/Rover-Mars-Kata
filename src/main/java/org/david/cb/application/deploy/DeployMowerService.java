@@ -9,6 +9,7 @@ import org.david.cb.commandwriter.PositionWriter;
 import org.david.cb.mower.Mower;
 import org.david.cb.mower.MowerCommand;
 import org.david.cb.mower.Orientation;
+import org.david.cb.mower.exception.IncorrectInitialPositionException;
 import org.david.cb.plateau.BorderPlateau;
 import org.david.cb.plateau.Plateau;
 
@@ -31,7 +32,8 @@ public class DeployMowerService implements DeployService {
     public void deploy() throws
             IncorrectCommandException,
             IncorrectCommandForPlateauLimitsException,
-            IncorrectCommandForMowerInitialPositionException
+            IncorrectCommandForMowerInitialPositionException,
+            IncorrectInitialPositionException
     {
 
         Plateau plateau = getPlateau();
@@ -54,7 +56,7 @@ public class DeployMowerService implements DeployService {
 
     }
 
-    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException {
+    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialPositionException {
         String mowerInitialPosition = commandReader.readCommand();
         String regexMowerInitialPosition = "(\\d) (\\d) (\\w)";
 
