@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.david.cb.mower.Orientation.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BorderPlateauTest {
 
@@ -196,4 +197,16 @@ class BorderPlateauTest {
         assertEquals(coordinates, newCoordinates);
     }
 
+    @Test
+    void checkCoordinates_should_return_true_if_coordinates_are_inside_plateau() {
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        Coordinates coordinates = new Coordinates(limitX, limitY);
+
+        boolean checkedCoordinates = borderPlateau.checkCoordinates(coordinates);
+
+        assertTrue(checkedCoordinates);
+    }
 }

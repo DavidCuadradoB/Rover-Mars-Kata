@@ -40,7 +40,7 @@ public class BorderPlateau implements Plateau {
 
     @Override
     public boolean checkCoordinates(Coordinates coordinates) {
-        return false;
+        return true;
     }
 
     private Coordinates getCoordinatesFacingWest(Coordinates currentCoordinates) {
