@@ -30,12 +30,17 @@ public class DeployMowerService  {
 
     public void deploy() throws
             IncorrectCommandException,
-            IncorrectCommandForPlateauLimitsException,
             IncorrectCommandForMowerInitialPositionException,
             IncorrectInitialCoordinatesException
     {
 
-        Plateau plateau = getPlateau();
+    }
+    public void deploy(Plateau plateau) throws
+            IncorrectCommandException,
+            IncorrectCommandForMowerInitialPositionException,
+            IncorrectInitialCoordinatesException
+    {
+
         Mower mower = getMower(plateau);
         List<MowerCommand> mowerCommands = new ArrayList<>();
 
@@ -50,8 +55,6 @@ public class DeployMowerService  {
                         movedMower.getCoordinates().getY() + " " +
                         movedMower.getOrientation().abbreviation
         );
-
-
     }
 
     private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
@@ -73,22 +76,5 @@ public class DeployMowerService  {
             return new Mower(initialCoordinates, orientation, plateau);
         }
         throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
-    }
-
-    private Plateau getPlateau() throws IncorrectCommandForPlateauLimitsException {
-        String plateauLimitsRaw = commandReader.readCommand();
-        String regexPlateauLimits = "(\\d) (\\d)";
-
-        Pattern patternPlateauLimits = Pattern.compile(regexPlateauLimits);
-        Matcher matcherPlateauLimits = patternPlateauLimits.matcher(plateauLimitsRaw);
-
-        if (matcherPlateauLimits.find()) {
-            return new BorderPlateau(
-                    Integer.parseInt(matcherPlateauLimits.group(1)),
-                    Integer.parseInt(matcherPlateauLimits.group(2))
-            );
-        } else {
-            throw new IncorrectCommandForPlateauLimitsException(plateauLimitsRaw);
-        }
     }
 }

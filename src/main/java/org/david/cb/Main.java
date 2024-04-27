@@ -17,6 +17,6 @@ public class Main {
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();
         DeployMowerService service = new DeployMowerService(terminalCommandReader, terminalPositionWriter);
 
-        service.deploy();
+//        service.deploy();
     }
 }
