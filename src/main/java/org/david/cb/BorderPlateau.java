@@ -36,10 +36,11 @@ public class BorderPlateau implements Plateau {
             }
             return targetCoordinates;
         } else {
-            if (currentCoordinates.getX() - 1 < 0) {
+            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
+            if (currentCoordinates.getX() - 1 < 0 || this.obstacles.contains(targetCoordinates)) {
                 return currentCoordinates;
             }
-            return new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
+            return targetCoordinates;
         }
     }
 
