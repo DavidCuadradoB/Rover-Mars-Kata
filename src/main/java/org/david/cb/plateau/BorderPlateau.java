@@ -8,16 +8,16 @@ import java.util.List;
 
 public class BorderPlateau implements Plateau {
 
-    public static final int BOTTOM_LIMIT = 0;
-    public static final int LEFT_LIMIT = 0;
-    private final int leftLimit;
-    private final int topLimit;
+    public static final int SOUTH_LIMIT = 0;
+    public static final int WEST_LIMIT = 0;
+    private final int eastLimit;
+    private final int northLimit;
 
     private final List<Coordinates> obstacles = new ArrayList<>();
 
-    public BorderPlateau(int leftLimit, int topLimit) {
-        this.leftLimit = leftLimit;
-        this.topLimit = topLimit;
+    public BorderPlateau(int eastLimit, int northLimit) {
+        this.eastLimit = eastLimit;
+        this.northLimit = northLimit;
     }
 
     @Override
@@ -40,12 +40,15 @@ public class BorderPlateau implements Plateau {
 
     @Override
     public boolean checkCoordinates(Coordinates coordinates) {
+        if (coordinates.getX() > eastLimit) {
+            return false;
+        }
         return true;
     }
 
     private Coordinates getCoordinatesFacingWest(Coordinates currentCoordinates) {
         Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
-        if (targetCoordinates.getX() < BOTTOM_LIMIT || this.obstacles.contains(targetCoordinates)) {
+        if (targetCoordinates.getX() < SOUTH_LIMIT || this.obstacles.contains(targetCoordinates)) {
             return currentCoordinates;
         }
         return targetCoordinates;
@@ -53,7 +56,7 @@ public class BorderPlateau implements Plateau {
 
     private Coordinates getCoordinatesFacingSouth(Coordinates currentCoordinates) {
         Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() - 1);
-        if (targetCoordinates.getY() < LEFT_LIMIT || this.obstacles.contains(targetCoordinates)) {
+        if (targetCoordinates.getY() < WEST_LIMIT || this.obstacles.contains(targetCoordinates)) {
             return currentCoordinates;
         }
         return targetCoordinates;
@@ -61,7 +64,7 @@ public class BorderPlateau implements Plateau {
 
     private Coordinates getCoordinatesFacingEast(Coordinates currentCoordinates) {
         Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX() + 1, currentCoordinates.getY());
-        if (targetCoordinates.getX() > this.leftLimit || this.obstacles.contains(targetCoordinates)) {
+        if (targetCoordinates.getX() > this.eastLimit || this.obstacles.contains(targetCoordinates)) {
             return currentCoordinates;
         }
         return targetCoordinates;
@@ -69,7 +72,7 @@ public class BorderPlateau implements Plateau {
 
     private Coordinates getCoordinatesFacingNorth(Coordinates currentCoordinates) {
         Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
-        if (targetCoordinates.getY() > this.topLimit || this.obstacles.contains(targetCoordinates)) {
+        if (targetCoordinates.getY() > this.northLimit || this.obstacles.contains(targetCoordinates)) {
             return currentCoordinates;
         }
         return targetCoordinates;
