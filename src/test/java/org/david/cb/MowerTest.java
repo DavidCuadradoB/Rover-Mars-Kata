@@ -1,6 +1,6 @@
 package org.david.cb;
 
-import org.david.cb.mower.IncorrectCommandException;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.mower.Mower;
 import org.david.cb.mower.MowerCommand;
 import org.david.cb.mower.Orientation;

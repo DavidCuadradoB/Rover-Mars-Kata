@@ -1,11 +1,11 @@
 package org.david.cb.deploy;
 
 import org.david.cb.application.deploy.DeployMowerService;
-import org.david.cb.application.deploy.IncorrectCommandForMowerInitialPositionException;
-import org.david.cb.application.deploy.IncorrectCommandForPlateauLimitsException;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.commandreader.CommandReader;
 import org.david.cb.commandwriter.PositionWriter;
-import org.david.cb.mower.IncorrectCommandException;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

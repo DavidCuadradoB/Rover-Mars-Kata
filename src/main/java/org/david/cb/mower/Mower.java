@@ -1,6 +1,7 @@
 package org.david.cb.mower;
 
 import org.david.cb.Coordinates;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.plateau.Plateau;
 
 import java.util.List;
