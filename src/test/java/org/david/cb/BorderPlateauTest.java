@@ -210,6 +210,19 @@ class BorderPlateauTest {
     }
 
     @Test
+    void checkCoordinates_should_return_true_if_coordinates_are_in_0_0_position() {
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        Coordinates coordinates = new Coordinates(0, 0);
+
+        boolean checkedCoordinates = borderPlateau.checkCoordinates(coordinates);
+
+        assertTrue(checkedCoordinates);
+    }
+
+    @Test
     void checkCoordinates_should_return_false_if_coordinates_are_outside_east_of_plateau() {
         int limitX = 5;
         int limitY = 10;
