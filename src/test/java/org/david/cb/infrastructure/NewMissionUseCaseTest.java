@@ -1,6 +1,6 @@
 package org.david.cb.infrastructure;
 
-import org.david.cb.application.deploy.CreatePlateauService;
+import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.newmissionusecase.NewMissionUseCase;

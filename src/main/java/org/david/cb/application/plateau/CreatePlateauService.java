@@ -1,4 +1,4 @@
-package org.david.cb.application.deploy;
+package org.david.cb.application.plateau;
 
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.CommandReader;

@@ -1,14 +1,11 @@
 package org.david.cb.application.newmissionusecase;
 
-import org.david.cb.application.deploy.CreatePlateauService;
+import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.CommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
-import org.david.cb.model.mower.Mower;
 import org.david.cb.model.plateau.Plateau;
-
-import java.util.Optional;
 
 public class NewMissionUseCase {
 
