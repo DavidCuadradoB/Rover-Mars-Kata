@@ -1,5 +1,7 @@
 package org.david.cb;
 
+import java.util.Optional;
+
 public class Mower {
 
     private final Coordinates coordinates;
@@ -20,20 +22,21 @@ public class Mower {
         return coordinates;
     }
 
-    public Mower execute(MoveCommand command) throws IncorrectCommandException {
+    public Mower execute(MoveCommand commands) throws IncorrectCommandException {
 
         Mower moved_mower = this;
 
-        for (char c : command.getCommands().toCharArray()) {
-            char commandUpperCase = Character.toUpperCase(c);
-            if (commandUpperCase == 'L') {
+        for (char c : commands.getCommands().toCharArray()) {
+            Optional<MowerCommand> mowerCommand = MowerCommand.fromChar(Character.toUpperCase(c));
+
+            MowerCommand command = mowerCommand.orElseThrow(() -> new IncorrectCommandException(c));
+
+            if (MowerCommand.ROTATE_LEFT.equals(command)) {
                 moved_mower = rotateLeft();
-            } else if (commandUpperCase == 'R') {
+            } else if (MowerCommand.ROTATE_RIGHT.equals(command)) {
                 moved_mower = rotateRight();
-            } else if (commandUpperCase == 'M') {
+            } else if (MowerCommand.MOVE_FORWARD.equals(command)) {
                 moved_mower = moveForward();
-            } else {
-                throw new IncorrectCommandException(c);
             }
         }
         plateau.addObstacle(moved_mower.coordinates);
