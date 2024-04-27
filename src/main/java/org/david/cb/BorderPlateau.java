@@ -18,10 +18,11 @@ public class BorderPlateau implements Plateau {
     @Override
     public Coordinates calculatePosition(Coordinates currentCoordinates, Orientation orientation) {
         if (Orientation.NORTH == orientation) {
-            if (currentCoordinates.getY() + 1 > limitY) {
+            Coordinates targetCoordinates = new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
+            if (targetCoordinates.getY() > limitY || this.obstacles.contains(targetCoordinates)) {
                 return currentCoordinates;
             }
-            return new Coordinates(currentCoordinates.getX(), currentCoordinates.getY() + 1);
+            return targetCoordinates;
         } else if (Orientation.EAST == orientation) {
             if (currentCoordinates.getX() + 1 > limitX) {
                 return currentCoordinates;
@@ -42,7 +43,7 @@ public class BorderPlateau implements Plateau {
 
     @Override
     public void addObstacle(Coordinates coordinates) {
-
+        this.obstacles.add(coordinates);
     }
 
     public int getLimitX() {

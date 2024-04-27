@@ -49,6 +49,23 @@ class BorderPlateauTest {
     }
 
     @Test
+    void calculatePosition_when_orientation_is_north_but_there_are_an_obstacle_should_no_move_to_north() {
+
+        int limitX = 5;
+        int limitY = 10;
+        BorderPlateau borderPlateau = new BorderPlateau(limitX, limitY);
+
+        int x = 2;
+        int y = 3;
+        Coordinates coordinates = new Coordinates(x, y);
+        borderPlateau.addObstacle(new Coordinates(x, y+1));
+
+        Coordinates newCoordinates = borderPlateau.calculatePosition(coordinates, NORTH);
+
+        assertEquals(coordinates, newCoordinates);
+    }
+
+    @Test
     void calculatePosition_when_orientation_is_east_should_move_to_east() {
 
         int limitX = 5;
