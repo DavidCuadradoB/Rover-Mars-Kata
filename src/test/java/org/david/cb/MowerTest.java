@@ -9,11 +9,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.david.cb.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MowerTest {
 
+    public static final int X = 5;
+    public static final int Y = 7;
     @Mock
     private Plateau plateau;
 
@@ -47,6 +50,20 @@ class MowerTest {
 
         assertEquals(movedMower.getCoordinates(), expectedCoordinates);
 
+    }
+
+    @Test
+    void execute_should_add_an_obstacle_to_grid_when_finish_the_movement() throws IncorrectCommandException {
+        Mower mower = getMower(NORTH);
+        String commands = "M";
+        MoveCommand command = new MoveCommand(commands);
+
+        Coordinates newCoordinates = new Coordinates(1, 1);
+        when(plateau.calculatePosition(mower.getCoordinates(), mower.getOrientation())).thenReturn(newCoordinates);
+
+        mower.execute(command);
+
+        verify(plateau).addObstacle(newCoordinates);
     }
 
     @ParameterizedTest
@@ -161,7 +178,7 @@ class MowerTest {
     }
 
     private Mower getMower(Orientation orientation) {
-        Coordinates coordinates = new Coordinates(5, 7);
+        Coordinates coordinates = new Coordinates(X, Y);
         return new Mower(coordinates, orientation, plateau);
     }
 }

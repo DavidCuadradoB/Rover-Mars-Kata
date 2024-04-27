@@ -1,9 +1,14 @@
 package org.david.cb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BorderPlateau implements Plateau {
 
     private final int limitX;
     private final int limitY;
+
+    private final List<Coordinates> obstacles = new ArrayList<>();
 
     public BorderPlateau(int limitX, int limitY) {
         this.limitX = limitX;
@@ -33,6 +38,11 @@ public class BorderPlateau implements Plateau {
             }
             return new Coordinates(currentCoordinates.getX() - 1, currentCoordinates.getY());
         }
+    }
+
+    @Override
+    public void addObstacle(Coordinates coordinates) {
+
     }
 
     public int getLimitX() {

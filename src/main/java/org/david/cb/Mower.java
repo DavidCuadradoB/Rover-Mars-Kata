@@ -36,6 +36,7 @@ public class Mower {
                 throw new IncorrectCommandException(c);
             }
         }
+        plateau.addObstacle(moved_mower.coordinates);
 
         return moved_mower;
     }
