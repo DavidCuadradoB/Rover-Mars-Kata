@@ -32,8 +32,8 @@ public class NewMissionUseCase {
             IncorrectCommandException
     {
 
+        Plateau plateau = createPlateauService.createPlateau();
         do {
-            Plateau plateau = createPlateauService.createPlateau();
             deployMowerService.deploy(plateau);
         } while(
                 !commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower")

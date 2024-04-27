@@ -14,8 +14,10 @@ public class TerminalCommandReader implements CommandReader {
 
     @Override
     public String readCommand(String question) {
+        Scanner scanner1 = new Scanner(System.in);
+
         System.out.println(question);
 
-        return scanner.nextLine();
+        return scanner1.nextLine();
     }
 }

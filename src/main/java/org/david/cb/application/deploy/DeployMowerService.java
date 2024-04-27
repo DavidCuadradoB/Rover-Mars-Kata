@@ -37,7 +37,7 @@ public class DeployMowerService  {
         Mower mower = getMower(plateau);
         List<MowerCommand> mowerCommands = new ArrayList<>();
 
-        for (char c : commandReader.readCommand("Introduce the mower initial values").toCharArray()) {
+        for (char c : commandReader.readCommand("Introduce the mower's commands of movements").toCharArray()) {
             mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
 
@@ -51,7 +51,7 @@ public class DeployMowerService  {
     }
 
     private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
-        String mowerInitialPosition = commandReader.readCommand("Introduce the mower's commands of movements");
+        String mowerInitialPosition = commandReader.readCommand("Introduce the mower initial values");
         String regexMowerInitialPosition = "(\\d) (\\d) (\\w)";
 
         Pattern patternMowerInitialPosition = Pattern.compile(regexMowerInitialPosition);

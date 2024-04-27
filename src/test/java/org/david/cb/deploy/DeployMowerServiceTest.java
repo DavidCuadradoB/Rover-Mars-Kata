@@ -1,11 +1,10 @@
 package org.david.cb.deploy;
 
 import org.david.cb.application.deploy.DeployMowerService;
+import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.CommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.junit.jupiter.api.Assertions;
@@ -41,9 +40,9 @@ class DeployMowerServiceTest {
         String expectedPosition = "1 3 N";
 
         Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerInitialPosition);
         Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerMovement);
 
         deployMowerService.deploy(new BorderPlateau(5, 5));
 
@@ -57,9 +56,9 @@ class DeployMowerServiceTest {
         String mowerMovement = "MMR/RR";
 
         Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerInitialPosition);
         Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerMovement);
 
         IncorrectCommandException exception = assertThrows(
                 IncorrectCommandException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))
@@ -74,12 +73,9 @@ class DeployMowerServiceTest {
     @Test
     void deploy_should_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_mower_initial_position_has_incorrect_command() {
         String mowerInitialPosition = "a a N";
-        String mowerMovement = "MMRRR";
 
         Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
-        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerInitialPosition);
 
         IncorrectCommandForMowerInitialPositionException exception = assertThrows(
                 IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))
@@ -93,12 +89,9 @@ class DeployMowerServiceTest {
     @Test
     void deploy_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_Orientation_is_incorrect() {
         String mowerInitialPosition = "1 4 J";
-        String mowerMovement = "MMRRR";
 
         Mockito.when(commandReader.readCommand("Introduce the mower initial values"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
-        Mockito.when(commandReader.readCommand("Introduce the mower's commands of movements"))
-                .thenReturn(mowerInitialPosition, mowerMovement);
+                .thenReturn(mowerInitialPosition);
 
         IncorrectCommandForMowerInitialPositionException exception = assertThrows(
                 IncorrectCommandForMowerInitialPositionException.class, () -> deployMowerService.deploy(new BorderPlateau(5, 5))

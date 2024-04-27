@@ -70,9 +70,9 @@ class NewMissionUseCaseTest {
         BorderPlateau plateau = new BorderPlateau(1, 1);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);
         Mockito.when(commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower"))
-                .thenReturn("exit");
+                .thenReturn("", "exit");
         newMissionUseCase.execute();
         Mockito.verify(createPlateauService, Mockito.times(1)).createPlateau();
-        Mockito.verify(deployMowerService, Mockito.times(1)).deploy(plateau);
+        Mockito.verify(deployMowerService, Mockito.times(2)).deploy(plateau);
     }
 }
