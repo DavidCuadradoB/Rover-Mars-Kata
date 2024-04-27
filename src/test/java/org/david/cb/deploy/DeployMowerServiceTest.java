@@ -32,7 +32,7 @@ class DeployMowerServiceTest {
 
 
     @Test
-    void deploy_should_create_a_plateau_with_the_values_get_from_command_reader() throws IncorrectInitialCoordinatesException {
+    void deploy_should_create_a_plateau_with_the_values_get_from_command_reader() {
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "LMLMLMLMM";
 

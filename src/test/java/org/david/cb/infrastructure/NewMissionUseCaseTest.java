@@ -49,7 +49,10 @@ class NewMissionUseCaseTest {
     }
 
     @Test
-    void execute_should_deploy_a_new_mower() throws IncorrectCommandForPlateauLimitsException, IncorrectInitialCoordinatesException {
+    void execute_should_deploy_a_new_mower() throws
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectInitialCoordinatesException
+    {
         BorderPlateau plateau = new BorderPlateau(10, 10);
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);
@@ -61,7 +64,10 @@ class NewMissionUseCaseTest {
     }
 
     @Test
-    void execute_should_print_mower_position() throws IncorrectCommandForPlateauLimitsException, IncorrectInitialCoordinatesException {
+    void execute_should_print_mower_position() throws
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectInitialCoordinatesException
+    {
         BorderPlateau plateau = new BorderPlateau(10, 10);
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);

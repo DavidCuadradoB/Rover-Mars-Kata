@@ -49,7 +49,7 @@ class MowerTest {
     }
 
     @Test
-    void create_mower_outside_plateau_should_throw_an_IncorrectInitialPositionException() throws IncorrectInitialCoordinatesException {
+    void create_mower_outside_plateau_should_throw_an_IncorrectInitialPositionException() {
         int initialPositionX = 100;
         int initialPositionY = 100;
         Coordinates coordinates = new Coordinates(initialPositionX, initialPositionY);
@@ -65,7 +65,7 @@ class MowerTest {
 
     @Test
     void execute_should_calculatePosition_using_the_plateau()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(EAST);
         List<MowerCommand> commands = List.of(MowerCommand.MOVE_FORWARD);
 
@@ -80,7 +80,7 @@ class MowerTest {
 
     @Test
     void execute_should_add_an_obstacle_to_grid_when_finish_the_movement()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(MowerCommand.MOVE_FORWARD);
 
@@ -94,7 +94,7 @@ class MowerTest {
 
     @Test
     void execute_should_move_the_mower()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(
                 MowerCommand.MOVE_FORWARD,
@@ -114,7 +114,7 @@ class MowerTest {
 
     @Test
     void execute_with_right_when_the_mower_is_facing_north_the_mower_should_rotate_to_east()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
@@ -125,7 +125,7 @@ class MowerTest {
 
     @Test
     void execute_with_right_when_the_mower_is_facing_east_the_mower_should_rotate_to_south()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(EAST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
@@ -136,7 +136,7 @@ class MowerTest {
 
     @Test
     void execute_with_right_when_the_mower_is_facing_south_the_mower_should_rotate_to_west()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(SOUTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
@@ -147,7 +147,7 @@ class MowerTest {
 
     @Test
     void execute_with_right_when_the_mower_is_facing_west_the_mower_should_rotate_to_north()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(WEST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
@@ -158,7 +158,7 @@ class MowerTest {
 
     @Test
     void execute_with_left_when_the_mower_is_facing_north_the_mower_should_rotate_to_west()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
@@ -169,7 +169,7 @@ class MowerTest {
 
     @Test
     void execute_with_left_when_the_mower_is_facing_west_the_mower_should_rotate_to_south()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(WEST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
@@ -180,7 +180,7 @@ class MowerTest {
 
     @Test
     void execute_with_left_when_the_mower_is_facing_south_the_mower_should_rotate_to_east()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(SOUTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
@@ -191,7 +191,7 @@ class MowerTest {
 
     @Test
     void execute_with_left_when_the_mower_is_facing_east_the_mower_should_rotate_to_north()
-            throws IncorrectCommandException, IncorrectInitialCoordinatesException {
+            throws IncorrectInitialCoordinatesException {
         Mower mower = getMower(EAST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
