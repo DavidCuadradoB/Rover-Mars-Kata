@@ -1,22 +1,20 @@
 package org.david.cb;
 
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.mower.Mower;
-import org.david.cb.mower.MowerCommand;
-import org.david.cb.mower.Orientation;
-import org.david.cb.mower.exception.IncorrectInitialPositionException;
-import org.david.cb.plateau.Plateau;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.david.cb.model.Coordinates;
+import org.david.cb.model.mower.Mower;
+import org.david.cb.model.mower.MowerCommand;
+import org.david.cb.model.mower.Orientation;
+import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
+import org.david.cb.model.plateau.Plateau;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.david.cb.mower.Orientation.*;
+import static org.david.cb.model.mower.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;

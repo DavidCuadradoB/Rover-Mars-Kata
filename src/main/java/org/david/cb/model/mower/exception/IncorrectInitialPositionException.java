@@ -1,4 +1,4 @@
-package org.david.cb.mower.exception;
+package org.david.cb.model.mower.exception;
 
 public class IncorrectInitialPositionException extends Exception {
     public IncorrectInitialPositionException(int x, int y) {

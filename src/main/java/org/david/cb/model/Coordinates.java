@@ -1,4 +1,4 @@
-package org.david.cb;
+package org.david.cb.model;
 
 import java.util.Objects;
 

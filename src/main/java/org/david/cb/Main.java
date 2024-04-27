@@ -6,7 +6,7 @@ import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitia
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.infrastructure.commandreader.TerminalCommandReader;
 import org.david.cb.infrastructure.commandwritter.TerminalPositionWriter;
-import org.david.cb.mower.exception.IncorrectInitialPositionException;
+import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
 
 import java.util.Scanner;
 
@@ -18,8 +18,5 @@ public class Main {
         DeployMowerService service = new DeployMowerService(terminalCommandReader, terminalPositionWriter);
 
         service.deploy();
-
-
-
     }
 }

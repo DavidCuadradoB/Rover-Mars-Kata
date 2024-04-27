@@ -1,5 +1,6 @@
 package org.david.cb.mower;
 
+import org.david.cb.model.mower.Orientation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

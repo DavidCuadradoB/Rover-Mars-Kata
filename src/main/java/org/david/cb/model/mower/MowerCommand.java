@@ -1,4 +1,4 @@
-package org.david.cb.mower;
+package org.david.cb.model.mower;
 
 import java.util.Optional;
 

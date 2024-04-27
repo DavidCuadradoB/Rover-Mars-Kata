@@ -1,5 +1,6 @@
 package org.david.cb.mower;
 
+import org.david.cb.model.mower.MowerCommand;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

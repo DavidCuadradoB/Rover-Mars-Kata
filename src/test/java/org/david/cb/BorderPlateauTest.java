@@ -1,9 +1,10 @@
 package org.david.cb;
 
-import org.david.cb.plateau.BorderPlateau;
+import org.david.cb.model.Coordinates;
+import org.david.cb.model.plateau.BorderPlateau;
 import org.junit.jupiter.api.Test;
 
-import static org.david.cb.mower.Orientation.*;
+import static org.david.cb.model.mower.Orientation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BorderPlateauTest {

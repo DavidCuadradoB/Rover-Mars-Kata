@@ -1,7 +1,7 @@
-package org.david.cb.plateau;
+package org.david.cb.model.plateau;
 
-import org.david.cb.Coordinates;
-import org.david.cb.mower.Orientation;
+import org.david.cb.model.Coordinates;
+import org.david.cb.model.mower.Orientation;
 
 public interface Plateau {
 

@@ -1,9 +1,9 @@
-package org.david.cb.mower;
+package org.david.cb.model.mower;
 
-import org.david.cb.Coordinates;
+import org.david.cb.model.Coordinates;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.mower.exception.IncorrectInitialPositionException;
-import org.david.cb.plateau.Plateau;
+import org.david.cb.model.plateau.Plateau;
+import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
 
 import java.util.List;
 

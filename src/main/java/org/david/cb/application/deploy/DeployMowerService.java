@@ -1,17 +1,17 @@
 package org.david.cb.application.deploy;
 
-import org.david.cb.Coordinates;
+import org.david.cb.model.Coordinates;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.commandreader.CommandReader;
 import org.david.cb.commandwriter.PositionWriter;
-import org.david.cb.mower.Mower;
-import org.david.cb.mower.MowerCommand;
-import org.david.cb.mower.Orientation;
-import org.david.cb.mower.exception.IncorrectInitialPositionException;
-import org.david.cb.plateau.BorderPlateau;
-import org.david.cb.plateau.Plateau;
+import org.david.cb.model.mower.Mower;
+import org.david.cb.model.mower.MowerCommand;
+import org.david.cb.model.mower.Orientation;
+import org.david.cb.model.mower.exception.IncorrectInitialPositionException;
+import org.david.cb.model.plateau.BorderPlateau;
+import org.david.cb.model.plateau.Plateau;
 
 import java.util.ArrayList;
 import java.util.List;

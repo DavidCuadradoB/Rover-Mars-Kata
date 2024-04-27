@@ -1,5 +1,6 @@
 package org.david.cb;
 
+import org.david.cb.model.Coordinates;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
