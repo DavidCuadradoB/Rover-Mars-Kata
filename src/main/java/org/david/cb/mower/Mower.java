@@ -32,11 +32,11 @@ public class Mower {
 
         for (MowerCommand command : commands) {
             if (MowerCommand.ROTATE_LEFT.equals(command)) {
-                moved_mower = rotateLeft();
+                moved_mower = moved_mower.rotateLeft();
             } else if (MowerCommand.ROTATE_RIGHT.equals(command)) {
-                moved_mower = rotateRight();
+                moved_mower = moved_mower.rotateRight();
             } else if (MowerCommand.MOVE_FORWARD.equals(command)) {
-                moved_mower = moveForward();
+                moved_mower = moved_mower.moveForward();
             }
         }
         plateau.addObstacle(moved_mower.coordinates);

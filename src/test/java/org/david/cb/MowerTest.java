@@ -21,8 +21,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class MowerTest {
 
-    public static final int X = 5;
-    public static final int Y = 7;
+    public static final int X = 2;
+    public static final int Y = 2;
     @Mock
     private Plateau plateau;
 
@@ -68,6 +68,26 @@ class MowerTest {
         mower.execute(commands);
 
         verify(plateau).addObstacle(newCoordinates);
+    }
+
+    @Test
+    void execute_should_move_the_mower()
+            throws IncorrectCommandException {
+        Mower mower = getMower(NORTH);
+        List<MowerCommand> commands = List.of(
+                MowerCommand.MOVE_FORWARD,
+                MowerCommand.MOVE_FORWARD
+        );
+
+        Coordinates firstCoordinates = new Coordinates(1, 1);
+        Coordinates secondCoordinates = new Coordinates(1, 2);
+        when(plateau.calculatePosition(mower.getCoordinates(), mower.getOrientation()))
+                .thenReturn(firstCoordinates, secondCoordinates);
+
+        Mower movedMower = mower.execute(commands);
+
+        verify(plateau).calculatePosition(mower.getCoordinates(), mower.getOrientation());
+        verify(plateau).calculatePosition(firstCoordinates, mower.getOrientation());
     }
 
     @Test
