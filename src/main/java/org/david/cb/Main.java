@@ -21,6 +21,7 @@ public class Main {
         TerminalNewMissionCommandReader terminalNewMissionCommandReader = new TerminalNewMissionCommandReader(scanner);
         DeployMowerService deployMowerService = new DeployMowerService(terminalMowerCommandReader);
         CreatePlateauService createPlateauService = new CreatePlateauService(terminalCommandReader);
+
         NewMissionUseCase newMissionUseCase = new NewMissionUseCase(
                 createPlateauService,
                 deployMowerService,
