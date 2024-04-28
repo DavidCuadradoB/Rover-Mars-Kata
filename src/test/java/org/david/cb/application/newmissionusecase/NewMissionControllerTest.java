@@ -76,8 +76,7 @@ class NewMissionControllerTest {
     @Test
     void execute_should_deploy_a_new_mower() throws
             IncorrectCommandForPlateauLimitsException,
-            IncorrectPlateauLimitsException,
-            IncorrectCommandForMowerInitialOrientationException {
+            IncorrectPlateauLimitsException {
         BorderPlateau plateau = new BorderPlateau(100, 100);
         CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(100 ,100);
 
