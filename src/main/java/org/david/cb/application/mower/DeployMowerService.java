@@ -32,12 +32,8 @@ public class DeployMowerService  {
 
         try {
             Mower mower = getMower(plateau);
-            List<MowerCommand> mowerCommands = new ArrayList<>();
-            getMowerCommandFromString(mowerCommands);
-            Mower movedMower = mower.execute(mowerCommands);
-
-            return Optional.of(movedMower);
-
+            List<MowerCommand> mowerCommands = getMowerCommandFromString();
+            return Optional.of(mower.execute(mowerCommands));
         } catch (IncorrectCommandForMowerInitialPositionException | IncorrectInitialCoordinatesException exception) {
             logger.error("Impossible to deploy the mower into the plateau", exception);
             return Optional.empty();
@@ -65,9 +61,11 @@ public class DeployMowerService  {
         throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
     }
 
-    private void getMowerCommandFromString(List<MowerCommand> mowerCommands) throws IncorrectCommandException {
+    private List<MowerCommand> getMowerCommandFromString() throws IncorrectCommandException {
+        List<MowerCommand> mowerCommands = new ArrayList<>();
         for (char c : mowerCommandReader.readMowerMovementCommands().toCharArray()) {
             mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
+        return mowerCommands;
     }
 }
