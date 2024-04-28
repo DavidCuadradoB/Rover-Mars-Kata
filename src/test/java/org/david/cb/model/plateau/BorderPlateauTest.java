@@ -1,8 +1,6 @@
 package org.david.cb.model.plateau;
 
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.mower.Mower;
-import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.junit.jupiter.api.Test;
 

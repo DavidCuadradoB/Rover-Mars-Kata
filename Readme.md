@@ -22,13 +22,13 @@ The objective of this project is deploy and control a Mower over a Plateau.
 ## How it works
 
 ### Classes diagram:
-![classes](https://i.imgur.com/UPUUqzE.png)
+![classes](https://i.imgur.com/kDqxkOK.png)
 
 In this diagram, almost all the classes are represented. This is divided in 3 main packages: Infrastructure, Application and  Model.
 
-* Infrastructure: The implementation are located here. For example, the Writer and the Reader implementations. In this case all of them are Terminal implementations but a new implementation could be used and should be here too. For example, read from a file instead from a terminal 
+* Infrastructure: The implementation are located here. For example, the Writer and the Reader implementations. In this case all of them are Terminal implementations but a new implementation could be used and should be here too. For example, read from a file instead from a terminal
+  * `NewMissionController`: Get the commands from the user to create the plateau and the mower.
 * Application: The use-case: NewMissionUseCase and the CreatePlateauService and DeployMowerService:
-  * `NewMissionUseCase`: This should be here because it acts as an orchestrator. It is which control the flow of the usecase.
   * `CreatePlateauService`: Create the Plateau from the User input.
   * `DeployMowerService`: Create and move the Mower over the plateau from the User input. 
 * Model: It's where all the business logic are. It has some Interfaces as `NewMissionCommandReader`, `MowerCommandReader` and `PlateauCommandReader` but also, it has the models as `Mower` and `Plateau`.
@@ -36,12 +36,12 @@ In this diagram, almost all the classes are represented. This is divided in 3 ma
   * `Plateau`: It is the model that represents a Plateau. It has the logic to create the Plateau and control the movement over itself. Also does some checks if the coordinates are available.
 
 ### New Mission use case
-![usecase](https://i.imgur.com/N47JKpY.png)
+![usecase](https://i.imgur.com/XkpMOqi.png)
 
 This diagram is the representation of the happy path of the application.
 
 1. `main`: inject the dependencies to the rest of the services
-2. `NewMissionUseCase`: controls the flow, asking `CreatePlateauService` to create the Plateau and `DeployMowerService` to deploy a new Mower. As part of the flow, ask the user if they want to deploy a new Mower.
+2. `NewMissionController`: Get the commands from the user and calls the different services to start the usecase.
 3. `CreatePlateauService`: Create a new Plateau based on the commands received by the user.
 4. `DeployMowerService`: Deploy and move a new Mower based on the commands received by the user.
 5. `Plateau`: Controls all related with the Plateau. The implementation `BorderPlateau` is an implementation with borders, but could have different implementations as a SphericalPlateau where one limit is connected with the start of the opposite side.
@@ -50,17 +50,18 @@ This diagram is the representation of the happy path of the application.
 
 ## Things to take in consideration
 
-1. The main point of discussion that I have with myself is about the `CreatePlateauService` and `DeployMowerService`. Their objective is to create Plateau and Mower respectively. But it's necessary get the information from the user. The strategy is separate this logic using the `CommandReader` services using them as **Ports**. But also it's a little bit weird, because the system is getting information of the user from the application layer.
-   1. The alternative could be got the user commands from some service in the infrastructure layer and pass to the `NewMissionUseCase` the command with the different information to create the plateau and deploy de Mower, **but then, you could have the logic that should be in the usecase in the infrastructure layer** so I decided put this `CommandReader` injected into the Services instead.
-   2. This could be easier with an api where there are 3 different endpoints:
-      1. Create a plateau and save it in ddbb
-      2. Deploy a Mower and save it in ddbb
-      3. Move a Mower get the Mower with the plateau and move the Mower
-      4. And the user of the api could control the flow of the application.
-      5. I was tempted to use spring with an api, but I thought that it could be an overkill for this Kata.
+1. The main point of discussion that I have with myself has been, how send the information to create the Plateau and the Mower to `CreatePlateauService` and `DeployMowerService`. I found 2 alternatives:
+   1. Both services (`CreatePlateauService` and `DeployMowerService`) get the data calling to `PlateauCommandReader` and `MowerCommandReader` and they get the information from the user.
+      1. This was my first option. Having `NewMissionUseCase` in the application layer and is `NewMissionUseCase` who control the main loop (create the plateau and deploying as much Mower as the user wants) calling `CreatePlateauService` and `DeployMowerService`.
+      2. The problem with this option is that the driving-side of the application: getting information from the user, is requested in the application layer, even if the request per se was in the infrastructure layer, this smells to an incorrect responsibilities.
+   2. `NewMissionController` calls both services (`CreatePlateauService` and `DeployMowerService`) passing the user commands in an DTO and create the plateau and deploy the Mower.
+      1. `NewMissionController` is now in the infrastructure layer acting like a controller.
+      2. This option is similar to what you have in an API. You get the information in the controller and pass it to the service.
+      3. The problem is that the loop of the application: (create the plateau and deploying as much Mower as the user wants) is in the infrastructure layer. This could be incorrect depending on if you consider this a business logic or not.
+      4. With an API, this loop should be in the system who calls the api, so I decided go with this option.
 2. The logic has been separated in such a way that each class has only an objective, complying with the `Single responsibility principle`:
    1. `Main`: Dependency Injection. I'm not a big fan of this. I could prefer the inversion of control. I tried to use Spring for it, but it's complicated to use it without Controllers and I thought that this could be an overkill for this kata.
-   2. `NewMissionUseCase`: Acts as an orchestrator, calling the different services to create the plateau and deploy the Mower 
+   2. `NewMissionController`: Acts as a controller, getting the commands from the user and calling the different services to create the plateau and deploy the Mower 
    3. `CreatePlateauService`: Create the Plateau based on the commands get from the `PlateauCommandReader`
    4. `DeployMowerService`: Controls the Mower based on the commands get from the `MowerCommandReader`
    5. `PlateauCommandReader`: Returns the commands for the plateau creation.
@@ -81,8 +82,8 @@ This diagram is the representation of the happy path of the application.
 
 1. Add a dependency injection system like Spring. It's weird to have this dependency injection from the `Main`
 2. This could be easiest using an api system. Allowing to create and control the Plateau and the Mower
-3. I'm worried about the `CreatePlateauService`, `DeployMowerService` and the fact that they are using the `*CommandReaders`. It smells me that it has dependencies with the `Driving side` of the Hexagonal architecture. But since this is not an api system, it's not so easy apply Hexagonal architecture, so I've taken a few licenses.
-   1. The main smell that I have is that the system needs check if the values sent by the user are correct with a regex. This smells me that should be outside. But as I said, I've taken a few licenses.
+3. The `NewMissionController` could have some business logic. Depending on if you consider the flow of create the plateau and deploy the Mower as business logic, this could have business logic. But as I said before, this is a solution to get the user information in the infrastructure layer.
+   1. This is similar what you have in an API, but it's more complex because in an api, the request are independents. In this case, the user needs to keep introducing information to create new Mowers.
 4. I would like to analyse better if all the models should be `immutables`:
    1. In general: `Entities` should be Mutable and `Value Object` should be Immutable. But in this system, the Mower is created and moved in one usecase, and the Plateau only saved the obstacles. So this is why decided do it immutable. But I would like to analyse this decision with more time and with other point of view.
    2. Since those are immutable and the creation of the `Mower` is "complex", maybe I could add a `Factory` here to create the `Mowers` where check the creation of the `Mower`

@@ -48,10 +48,10 @@ public class BorderPlateau implements Plateau {
     public boolean checkCoordinates(Coordinates coordinates) {
         if (
                 coordinates.getX() > eastLimit ||
-                coordinates.getY() > northLimit ||
-                SOUTH_LIMIT > coordinates.getY() ||
-                WEST_LIMIT > coordinates.getX() ||
-                obstacles.contains(coordinates)
+                        coordinates.getY() > northLimit ||
+                        SOUTH_LIMIT > coordinates.getY() ||
+                        WEST_LIMIT > coordinates.getX() ||
+                        obstacles.contains(coordinates)
         ) {
             return false;
         }

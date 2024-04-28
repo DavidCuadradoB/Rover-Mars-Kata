@@ -1,8 +1,8 @@
 package org.david.cb.model.mower;
 
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.plateau.Plateau;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
+import org.david.cb.model.plateau.Plateau;
 
 import java.util.List;
 import java.util.Objects;
