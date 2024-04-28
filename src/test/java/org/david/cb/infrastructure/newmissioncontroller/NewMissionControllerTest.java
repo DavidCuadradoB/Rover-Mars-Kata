@@ -1,9 +1,8 @@
-package org.david.cb.application.newmissionusecase;
+package org.david.cb.infrastructure.newmissioncontroller;
 
 import org.david.cb.application.mower.DeployMowerService;
 import org.david.cb.application.mower.command.CreateMowerCommand;
 import org.david.cb.application.mower.command.MowerMovementCommand;
-import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.plateau.command.CreatePlateauCommand;
