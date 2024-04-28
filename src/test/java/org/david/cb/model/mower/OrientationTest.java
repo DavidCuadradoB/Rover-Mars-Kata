@@ -1,4 +1,4 @@
-package org.david.cb.mower;
+package org.david.cb.model.mower;
 
 import org.david.cb.model.mower.Orientation;
 import org.junit.jupiter.api.Assertions;

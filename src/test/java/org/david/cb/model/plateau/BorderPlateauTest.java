@@ -1,7 +1,6 @@
-package org.david.cb;
+package org.david.cb.model.plateau;
 
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.plateau.BorderPlateau;
 import org.junit.jupiter.api.Test;
 
 import static org.david.cb.model.mower.Orientation.*;

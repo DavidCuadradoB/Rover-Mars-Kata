@@ -1,6 +1,5 @@
-package org.david.cb.deploy;
+package org.david.cb.application.deploy;
 
-import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.model.Coordinates;
 import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.mower.Mower;

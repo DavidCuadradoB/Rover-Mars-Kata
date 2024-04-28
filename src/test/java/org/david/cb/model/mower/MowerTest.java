@@ -1,10 +1,6 @@
-package org.david.cb;
+package org.david.cb.model.mower;
 
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.mower.Mower;
-import org.david.cb.model.mower.MowerCommand;
-import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.Plateau;
 import org.junit.jupiter.api.Test;
