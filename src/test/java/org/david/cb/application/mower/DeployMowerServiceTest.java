@@ -11,9 +11,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class DeployMowerServiceTest {
@@ -38,7 +41,7 @@ class DeployMowerServiceTest {
     }
 
     @Test
-    void deploy_should_throw_an_IncorrectCommandException_when_the_movement_has_incorrect_command()
+    void deploy_should_return_optional_empty_when_the_movement_has_incorrect_command()
             throws IncorrectPlateauLimitsException {
         CreateMowerCommand createMowerCommand = new CreateMowerCommand(1,2 , "N");
         MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMR/RR");
@@ -52,7 +55,7 @@ class DeployMowerServiceTest {
 
 
     @Test
-    void deploy_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_Orientation_is_incorrect()
+    void deploy_should_return_optional_empty_when_the_Orientation_is_incorrect()
             throws IncorrectPlateauLimitsException {
         CreateMowerCommand createMowerCommand = new CreateMowerCommand(1 ,2, "J");
         MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMRRR");
@@ -62,5 +65,19 @@ class DeployMowerServiceTest {
 
         Assertions.assertEquals(mower, Optional.empty());
     }
+
+    @Test
+    void deploy_should_return_optional_empty_when_the_mower_cannot_be_created() {
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1 ,2, "N");
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMRRR");
+
+        BorderPlateau plateau = Mockito.mock(BorderPlateau.class);
+        Mockito.when(plateau.checkCoordinates(any())).thenReturn(false);
+        deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+        Optional<Mower> mowerInObstacle = deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+
+        Assertions.assertEquals(mowerInObstacle, Optional.empty());
+    }
+
 
 }
