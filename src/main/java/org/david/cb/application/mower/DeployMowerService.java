@@ -1,9 +1,10 @@
 package org.david.cb.application.mower;
 
+import org.david.cb.application.mower.command.CreateMowerCommand;
+import org.david.cb.application.mower.command.MowerMovementCommand;
 import org.david.cb.application.mower.exceptions.IncorrectCommandException;
-import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialPositionException;
+import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.MowerCommand;
 import org.david.cb.model.mower.Orientation;
@@ -15,26 +16,20 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class DeployMowerService  {
+public class DeployMowerService {
 
-    public static final String REGEX_MOWER_INITIAL_POSITION = "(\\d) (\\d) (\\w)";
-    private final MowerCommandReader mowerCommandReader;
-    Logger logger = LoggerFactory.getLogger(DeployMowerService.class);
+    private final Logger logger = LoggerFactory.getLogger(DeployMowerService.class);
 
-    public DeployMowerService(MowerCommandReader mowerCommandReader) {
-        this.mowerCommandReader = mowerCommandReader;
-    }
-
-    public Optional<Mower> deploy(Plateau plateau) {
-
+    public Optional<Mower> deploy(
+            CreateMowerCommand createMowerCommand,
+            MowerMovementCommand mowerMovementCommand,
+            Plateau plateau) {
         try {
-            Mower mower = getMower(plateau);
-            List<MowerCommand> mowerCommands = getMowerCommandFromString();
+            Mower mower = getMower(createMowerCommand, plateau);
+            List<MowerCommand> mowerCommands = getMowerCommandFromString(mowerMovementCommand);
             return Optional.of(mower.execute(mowerCommands));
-        } catch (IncorrectCommandForMowerInitialPositionException | IncorrectInitialCoordinatesException exception) {
+        } catch (IncorrectCommandForMowerInitialOrientationException | IncorrectInitialCoordinatesException exception) {
             logger.error("Impossible to deploy the mower into the plateau", exception);
             return Optional.empty();
         } catch (IncorrectCommandException exception) {
@@ -43,27 +38,26 @@ public class DeployMowerService  {
         }
     }
 
-    private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
-        String mowerInitialPosition = mowerCommandReader.readMowerInitialPositionCommands();
-        Matcher matcherMowerInitialPosition = Pattern.compile(REGEX_MOWER_INITIAL_POSITION).matcher(mowerInitialPosition);
+    private Mower getMower(CreateMowerCommand createMowerCommand, Plateau plateau)
+            throws IncorrectCommandForMowerInitialOrientationException, IncorrectInitialCoordinatesException {
 
-        if (matcherMowerInitialPosition.find()) {
-            Coordinates initialCoordinates = new Coordinates(
-                    Integer.parseInt(matcherMowerInitialPosition.group(1)),
-                    Integer.parseInt(matcherMowerInitialPosition.group(2))
-            );
+        Coordinates initialCoordinates = new Coordinates(
+                createMowerCommand.x(),
+                createMowerCommand.y()
+        );
 
-            Orientation orientation = Orientation.forAbbreviation(matcherMowerInitialPosition.group(3))
-                    .orElseThrow(() -> new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition));
+        Orientation orientation = Orientation.forAbbreviation(createMowerCommand.orientation())
+                .orElseThrow(() ->
+                        new IncorrectCommandForMowerInitialOrientationException(createMowerCommand.orientation())
+                );
 
-            return new Mower(initialCoordinates, orientation, plateau);
-        }
-        throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
+        return new Mower(initialCoordinates, orientation, plateau);
     }
 
-    private List<MowerCommand> getMowerCommandFromString() throws IncorrectCommandException {
+    private List<MowerCommand> getMowerCommandFromString(MowerMovementCommand mowerMovementCommand)
+            throws IncorrectCommandException {
         List<MowerCommand> mowerCommands = new ArrayList<>();
-        for (char c : mowerCommandReader.readMowerMovementCommands().toCharArray()) {
+        for (char c : mowerMovementCommand.movements().toCharArray()) {
             mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
         return mowerCommands;
