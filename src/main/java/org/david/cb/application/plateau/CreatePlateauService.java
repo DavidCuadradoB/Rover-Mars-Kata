@@ -4,6 +4,7 @@ import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimit
 import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +18,7 @@ public class CreatePlateauService {
         this.plateauCommandReader = plateauCommandReader;
     }
 
-    public Plateau createPlateau() throws IncorrectCommandForPlateauLimitsException {
+    public Plateau createPlateau() throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         String plateauLimitsRaw = plateauCommandReader.readPlateauLimits();
         Matcher matcherPlateauLimits = Pattern.compile(REGEX_PLATEAU_LIMITS).matcher(plateauLimitsRaw);
 

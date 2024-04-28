@@ -5,6 +5,7 @@ import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.plateau.BorderPlateau;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +27,8 @@ class DeployMowerServiceTest {
 
 
     @Test
-    void deploy_should_create_a_plateau_with_the_values_get_from_command_reader() {
+    void deploy_should_create_a_plateau_with_the_values_get_from_command_reader()
+            throws IncorrectPlateauLimitsException {
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "LMLMLMLMM";
 
@@ -43,7 +45,8 @@ class DeployMowerServiceTest {
     }
 
     @Test
-    void deploy_should_throw_an_IncorrectCommandException_when_the_movement_has_incorrect_command() {
+    void deploy_should_throw_an_IncorrectCommandException_when_the_movement_has_incorrect_command()
+            throws IncorrectPlateauLimitsException {
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "MMR/RR";
 
@@ -59,7 +62,8 @@ class DeployMowerServiceTest {
     }
 
     @Test
-    void deploy_should_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_mower_initial_position_has_incorrect_command() {
+    void deploy_should_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_mower_initial_position_has_incorrect_command()
+            throws IncorrectPlateauLimitsException {
         String mowerInitialPosition = "a a N";
 
         Mockito.when(mowerCommandReader.readMowerInitialPositionCommands()).thenReturn(mowerInitialPosition);
@@ -71,7 +75,8 @@ class DeployMowerServiceTest {
     }
 
     @Test
-    void deploy_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_Orientation_is_incorrect() {
+    void deploy_throw_an_IncorrectCommandForMowerInitialPositionException_when_the_Orientation_is_incorrect()
+            throws IncorrectPlateauLimitsException {
         String mowerInitialPosition = "1 4 J";
 
         Mockito.when(mowerCommandReader.readMowerInitialPositionCommands()).thenReturn(mowerInitialPosition);

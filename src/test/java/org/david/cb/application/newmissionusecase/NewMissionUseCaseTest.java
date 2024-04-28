@@ -10,6 +10,7 @@ import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.BorderPlateau;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,8 +41,8 @@ class NewMissionUseCaseTest {
 
 
     @Test
-    void execute_should_create_a_new_plateau() throws IncorrectCommandForPlateauLimitsException
-    {
+    void execute_should_create_a_new_plateau()
+            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         when(newMissionCommandReader.readExit()).thenReturn("exit");
         newMissionUseCase.execute();
         verify(createPlateauService).createPlateau();
@@ -50,7 +51,8 @@ class NewMissionUseCaseTest {
     @Test
     void execute_should_deploy_a_new_mower() throws
             IncorrectCommandForPlateauLimitsException,
-            IncorrectInitialCoordinatesException
+            IncorrectInitialCoordinatesException,
+            IncorrectPlateauLimitsException
     {
         BorderPlateau plateau = new BorderPlateau(10, 10);
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
@@ -64,7 +66,8 @@ class NewMissionUseCaseTest {
     @Test
     void execute_should_print_mower_position() throws
             IncorrectCommandForPlateauLimitsException,
-            IncorrectInitialCoordinatesException
+            IncorrectInitialCoordinatesException,
+            IncorrectPlateauLimitsException
     {
         BorderPlateau plateau = new BorderPlateau(10, 10);
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
@@ -80,7 +83,8 @@ class NewMissionUseCaseTest {
     }
 
     @Test
-    void execute_should_exit_loop_when_user_finish() throws IncorrectCommandForPlateauLimitsException
+    void execute_should_exit_loop_when_user_finish()
+            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException
     {
         BorderPlateau plateau = new BorderPlateau(1, 1);
         when(createPlateauService.createPlateau()).thenReturn(plateau);

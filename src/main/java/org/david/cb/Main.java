@@ -8,12 +8,14 @@ import org.david.cb.infrastructure.commandreader.TerminalMowerCommandReader;
 import org.david.cb.infrastructure.commandreader.TerminalNewMissionCommandReader;
 import org.david.cb.infrastructure.commandreader.TerminalPlateauCommandReader;
 import org.david.cb.infrastructure.commandwritter.TerminalPositionWriter;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IncorrectCommandForPlateauLimitsException {
+    public static void main(String[] args)
+            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         Scanner scanner = new Scanner(System.in);
         TerminalPlateauCommandReader terminalCommandReader = new TerminalPlateauCommandReader(scanner);
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();

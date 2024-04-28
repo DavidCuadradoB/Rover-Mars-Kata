@@ -6,6 +6,7 @@ import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.model.commandreader.NewMissionCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.model.plateau.Plateau;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 
 public class NewMissionUseCase {
 
@@ -26,7 +27,7 @@ public class NewMissionUseCase {
         this.positionWriter = positionWriter;
     }
 
-    public void execute() throws IncorrectCommandForPlateauLimitsException {
+    public void execute() throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         Plateau plateau = createPlateauService.createPlateau();
         do {
             deployMowerService.deploy(plateau)

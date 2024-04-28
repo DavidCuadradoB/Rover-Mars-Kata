@@ -2,6 +2,7 @@ package org.david.cb.model.plateau;
 
 import org.david.cb.model.Coordinates;
 import org.david.cb.model.mower.Orientation;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,13 @@ public class BorderPlateau implements Plateau {
 
     private final List<Coordinates> obstacles = new ArrayList<>();
 
-    public BorderPlateau(int eastLimit, int northLimit) {
+    public BorderPlateau(int eastLimit, int northLimit) throws IncorrectPlateauLimitsException {
+        if (eastLimit <= 0 || northLimit <= 0) {
+            throw new IncorrectPlateauLimitsException(eastLimit, northLimit);
+        }
         this.eastLimit = eastLimit;
         this.northLimit = northLimit;
+
     }
 
     @Override

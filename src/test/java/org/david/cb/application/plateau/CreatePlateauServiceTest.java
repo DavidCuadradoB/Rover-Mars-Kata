@@ -4,6 +4,7 @@ import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimit
 import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
+import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,8 @@ class CreatePlateauServiceTest {
 
     @Test
     void createPlateau_should_create_a_plateau_with_the_values_get_from_command_reader()
-            throws IncorrectCommandForPlateauLimitsException {
+            throws IncorrectCommandForPlateauLimitsException,
+            IncorrectPlateauLimitsException {
         String plateauSize = "5 5";
 
         Mockito.when(plateauCommandReader.readPlateauLimits()).thenReturn(plateauSize);
