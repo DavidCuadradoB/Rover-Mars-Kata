@@ -13,8 +13,8 @@ public class TerminalPlateauCommandReader implements PlateauCommandReader {
     }
 
     @Override
-    public String readPlateauLimits(String question) {
-        System.out.println(question);
+    public String readPlateauLimits() {
+        System.out.println("Introduce the plateau limits in the format 'X Y': ");
 
         return scanner.nextLine();
     }

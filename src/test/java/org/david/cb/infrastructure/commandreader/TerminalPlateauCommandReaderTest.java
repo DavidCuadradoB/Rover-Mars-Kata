@@ -26,7 +26,7 @@ class TerminalPlateauCommandReaderTest {
         String expectedCommand = "ABC";
         Mockito.when(scanner.nextLine()).thenReturn(expectedCommand);
 
-        String command = terminalCommandReader.readPlateauLimits("a question");
+        String command = terminalCommandReader.readPlateauLimits();
 
         Assertions.assertEquals(command, expectedCommand);
 

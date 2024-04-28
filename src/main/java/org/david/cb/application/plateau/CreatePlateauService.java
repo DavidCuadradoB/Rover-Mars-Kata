@@ -18,7 +18,7 @@ public class CreatePlateauService {
     }
 
     public Plateau createPlateau() throws IncorrectCommandForPlateauLimitsException {
-        String plateauLimitsRaw = plateauCommandReader.readPlateauLimits("Introduce the plateau limits: ");
+        String plateauLimitsRaw = plateauCommandReader.readPlateauLimits();
         Matcher matcherPlateauLimits = Pattern.compile(REGEX_PLATEAU_LIMITS).matcher(plateauLimitsRaw);
 
         if (matcherPlateauLimits.find()) {

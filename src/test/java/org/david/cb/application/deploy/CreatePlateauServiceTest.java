@@ -25,11 +25,11 @@ class CreatePlateauServiceTest {
     private CreatePlateauService createPlateauService;
 
     @Test
-    void deploy_should_create_a_plateau_with_the_values_get_from_command_reader()
+    void createPlateau_should_create_a_plateau_with_the_values_get_from_command_reader()
             throws IncorrectCommandForPlateauLimitsException {
         String plateauSize = "5 5";
 
-        Mockito.when(plateauCommandReader.readPlateauLimits("Introduce the plateau limits: ")).thenReturn(plateauSize);
+        Mockito.when(plateauCommandReader.readPlateauLimits()).thenReturn(plateauSize);
 
         Plateau plateau = createPlateauService.createPlateau();
         Plateau expectedPlateau = new BorderPlateau(5, 5);
@@ -38,12 +38,10 @@ class CreatePlateauServiceTest {
     }
 
     @Test
-    void deploy_should_throw_an_IncorrectCommandForPlateauLimitsException_when_the_plateauSize_has_incorrect_command() {
+    void createPlateau_should_throw_an_IncorrectCommandForPlateauLimitsException_when_the_plateauSize_has_incorrect_command() {
         String plateauSize = "a a";
-        String mowerInitialPosition = "1 2 N";
-        String mowerMovement = "MMRRR";
 
-        Mockito.when(plateauCommandReader.readPlateauLimits("Introduce the plateau limits: ")).thenReturn(plateauSize, mowerInitialPosition, mowerMovement);
+        Mockito.when(plateauCommandReader.readPlateauLimits()).thenReturn(plateauSize);
 
         IncorrectCommandForPlateauLimitsException exception = assertThrows(
                 IncorrectCommandForPlateauLimitsException.class, () -> createPlateauService.createPlateau()
