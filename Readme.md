@@ -1,5 +1,4 @@
 # Description
-
 The objective of this project is deploy and control a Mower over a Plateau.
 
 ## Assumptions
@@ -13,6 +12,7 @@ The objective of this project is deploy and control a Mower over a Plateau.
 
 
 ## How to use.
+* This project runs in Java 17
 * Run the main class
 * The terminal will ask you for the Plateau limits in the format of "X Y"
 * The terminal will ask you for the Mower's initial position in the format "X Y Orientation", being orientation: N, S, E, W.
@@ -89,3 +89,4 @@ This diagram is the representation of the happy path of the application.
    2. Since those are immutable and the creation of the `Mower` is "complex", maybe I could add a `Factory` here to create the `Mowers` where check the creation of the `Mower`
    3. This `immutability` makes that the `execute()` method is weird. Probably if `Mower` was mutable it could be easier.
 5. I considered the "Deploy of a Mower" as: The "creation" and the "movement" of the Mower. This could be divided in 2 parts, first deploy and second the movement. In an Api it could be clear, but since for this you need to save the Mower in some ddbb system, I prefer not overcomplicate the Kata and consider both actions as one.
+6. It has dependency with Spring-boot since I tried to use it for the dependency injection. But since the project is using the configured Spring log4j, to remove spring I need to configure log4j. Since I'm running out of time, I don't want to spend time configuring log4j, so I decided keep Spring for it. Of course in a real project I would configure log4j (or better, I could use Spring-Boot).
