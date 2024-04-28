@@ -5,7 +5,7 @@ import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.newmissionusecase.NewMissionUseCase;
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.commandreader.CommandReader;
+import org.david.cb.model.commandreader.PlateauLimitsCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.Orientation;
@@ -30,7 +30,7 @@ class NewMissionUseCaseTest {
     private CreatePlateauService createPlateauService;
 
     @Mock
-    private CommandReader commandReader;
+    private PlateauLimitsCommandReader plateauLimitsCommandReader;
 
     @Mock
     private PositionWriter positionWriter;
@@ -42,7 +42,7 @@ class NewMissionUseCaseTest {
     @Test
     void execute_should_create_a_new_plateau() throws IncorrectCommandForPlateauLimitsException
     {
-        Mockito.when(commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower"))
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("type 'exit' to exit the program or enter to add a new mower"))
                 .thenReturn("exit");
         newMissionUseCase.execute();
         Mockito.verify(createPlateauService).createPlateau();
@@ -57,7 +57,7 @@ class NewMissionUseCaseTest {
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);
         Mockito.when(deployMowerService.deploy(plateau)).thenReturn(Optional.of(mower));
-        Mockito.when(commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower"))
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("type 'exit' to exit the program or enter to add a new mower"))
                 .thenReturn("exit");
         newMissionUseCase.execute();
         Mockito.verify(deployMowerService).deploy(plateau);
@@ -72,7 +72,7 @@ class NewMissionUseCaseTest {
         Mower mower = new Mower(new Coordinates(5, 5), Orientation.NORTH, plateau);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);
         Mockito.when(deployMowerService.deploy(plateau)).thenReturn(Optional.of(mower));
-        Mockito.when(commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower"))
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("type 'exit' to exit the program or enter to add a new mower"))
                 .thenReturn("exit");
         newMissionUseCase.execute();
         Mockito.verify(positionWriter).write(
@@ -87,7 +87,7 @@ class NewMissionUseCaseTest {
     {
         BorderPlateau plateau = new BorderPlateau(1, 1);
         Mockito.when(createPlateauService.createPlateau()).thenReturn(plateau);
-        Mockito.when(commandReader.readCommand("type 'exit' to exit the program or enter to add a new mower"))
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("type 'exit' to exit the program or enter to add a new mower"))
                 .thenReturn("", "exit");
         newMissionUseCase.execute();
         Mockito.verify(createPlateauService, Mockito.times(1)).createPlateau();

@@ -1,10 +1,11 @@
 package org.david.cb;
 
-import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.newmissionusecase.NewMissionUseCase;
-import org.david.cb.infrastructure.commandreader.TerminalCommandReader;
+import org.david.cb.application.plateau.CreatePlateauService;
+import org.david.cb.infrastructure.commandreader.TerminalMowerCommandReader;
+import org.david.cb.infrastructure.commandreader.TerminalPlateauLimitsCommandReader;
 import org.david.cb.infrastructure.commandwritter.TerminalPositionWriter;
 
 import java.util.Scanner;
@@ -12,9 +13,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IncorrectCommandForPlateauLimitsException {
-        TerminalCommandReader terminalCommandReader = new TerminalCommandReader(new Scanner(System.in));
+        Scanner scanner = new Scanner(System.in);
+        TerminalPlateauLimitsCommandReader terminalCommandReader = new TerminalPlateauLimitsCommandReader(scanner);
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();
-        DeployMowerService deployMowerService = new DeployMowerService(terminalCommandReader, terminalPositionWriter);
+        TerminalMowerCommandReader terminalMowerCommandReader = new TerminalMowerCommandReader(scanner);
+        DeployMowerService deployMowerService = new DeployMowerService(terminalMowerCommandReader);
         CreatePlateauService createPlateauService = new CreatePlateauService(terminalCommandReader);
         NewMissionUseCase newMissionUseCase = new NewMissionUseCase(
                 createPlateauService,

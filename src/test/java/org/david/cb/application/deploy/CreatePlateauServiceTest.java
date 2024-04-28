@@ -2,7 +2,7 @@ package org.david.cb.application.deploy;
 
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.plateau.CreatePlateauService;
-import org.david.cb.model.commandreader.CommandReader;
+import org.david.cb.model.commandreader.PlateauLimitsCommandReader;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CreatePlateauServiceTest {
 
     @Mock
-    private CommandReader commandReader;
+    private PlateauLimitsCommandReader plateauLimitsCommandReader;
 
     @InjectMocks
     private CreatePlateauService createPlateauService;
@@ -29,7 +29,7 @@ class CreatePlateauServiceTest {
             throws IncorrectCommandForPlateauLimitsException {
         String plateauSize = "5 5";
 
-        Mockito.when(commandReader.readCommand("Introduce the plateau limits: ")).thenReturn(plateauSize);
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("Introduce the plateau limits: ")).thenReturn(plateauSize);
 
         Plateau plateau = createPlateauService.createPlateau();
         Plateau expectedPlateau = new BorderPlateau(5, 5);
@@ -43,7 +43,7 @@ class CreatePlateauServiceTest {
         String mowerInitialPosition = "1 2 N";
         String mowerMovement = "MMRRR";
 
-        Mockito.when(commandReader.readCommand("Introduce the plateau limits: ")).thenReturn(plateauSize, mowerInitialPosition, mowerMovement);
+        Mockito.when(plateauLimitsCommandReader.readPlateauLimits("Introduce the plateau limits: ")).thenReturn(plateauSize, mowerInitialPosition, mowerMovement);
 
         IncorrectCommandForPlateauLimitsException exception = assertThrows(
                 IncorrectCommandForPlateauLimitsException.class, () -> createPlateauService.createPlateau()

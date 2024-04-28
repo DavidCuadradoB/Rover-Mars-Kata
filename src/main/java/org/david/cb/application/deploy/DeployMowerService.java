@@ -3,8 +3,7 @@ package org.david.cb.application.deploy;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.model.Coordinates;
-import org.david.cb.model.commandreader.CommandReader;
-import org.david.cb.model.commandwriter.PositionWriter;
+import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.MowerCommand;
 import org.david.cb.model.mower.Orientation;
@@ -22,13 +21,11 @@ import java.util.regex.Pattern;
 public class DeployMowerService  {
 
     public static final String REGEX_MOWER_INITIAL_POSITION = "(\\d) (\\d) (\\w)";
-    private final CommandReader commandReader;
-    private final PositionWriter positionWriter;
+    private final MowerCommandReader mowerCommandReader;
     Logger logger = LoggerFactory.getLogger(DeployMowerService.class);
 
-    public DeployMowerService(CommandReader commandReader, PositionWriter positionWriter) {
-        this.commandReader = commandReader;
-        this.positionWriter = positionWriter;
+    public DeployMowerService(MowerCommandReader mowerCommandReader) {
+        this.mowerCommandReader = mowerCommandReader;
     }
 
     public Optional<Mower> deploy(Plateau plateau) {
@@ -50,14 +47,8 @@ public class DeployMowerService  {
         }
     }
 
-    private void getMowerCommandFromString(List<MowerCommand> mowerCommands) throws IncorrectCommandException {
-        for (char c : commandReader.readCommand("Introduce the mower's commands of movements").toCharArray()) {
-            mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
-        }
-    }
-
     private Mower getMower(Plateau plateau) throws IncorrectCommandForMowerInitialPositionException, IncorrectInitialCoordinatesException {
-        String mowerInitialPosition = commandReader.readCommand("Introduce the mower initial values");
+        String mowerInitialPosition = mowerCommandReader.readMowerInitialPositionCommands();
         Matcher matcherMowerInitialPosition = Pattern.compile(REGEX_MOWER_INITIAL_POSITION).matcher(mowerInitialPosition);
 
         if (matcherMowerInitialPosition.find()) {
@@ -72,5 +63,11 @@ public class DeployMowerService  {
             return new Mower(initialCoordinates, orientation, plateau);
         }
         throw new IncorrectCommandForMowerInitialPositionException(mowerInitialPosition);
+    }
+
+    private void getMowerCommandFromString(List<MowerCommand> mowerCommands) throws IncorrectCommandException {
+        for (char c : mowerCommandReader.readMowerMovementCommands().toCharArray()) {
+            mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
+        }
     }
 }

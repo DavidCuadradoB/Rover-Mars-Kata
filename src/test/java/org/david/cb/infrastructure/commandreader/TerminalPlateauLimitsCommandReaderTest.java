@@ -11,14 +11,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Scanner;
 
 @ExtendWith(MockitoExtension.class)
-class TerminalCommandReaderTest {
+class TerminalPlateauLimitsCommandReaderTest {
 
 
     @Mock
     Scanner scanner;
 
     @InjectMocks
-    private TerminalCommandReader terminalCommandReader;
+    private TerminalPlateauLimitsCommandReader terminalCommandReader;
 
 
     @Test
@@ -26,7 +26,7 @@ class TerminalCommandReaderTest {
         String expectedCommand = "ABC";
         Mockito.when(scanner.nextLine()).thenReturn(expectedCommand);
 
-        String command = terminalCommandReader.readCommand("a question");
+        String command = terminalCommandReader.readPlateauLimits("a question");
 
         Assertions.assertEquals(command, expectedCommand);
 
