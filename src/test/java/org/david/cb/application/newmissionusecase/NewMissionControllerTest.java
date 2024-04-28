@@ -57,7 +57,7 @@ class NewMissionControllerTest {
 
     @Test
     void execute_should_create_a_new_plateau()
-            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException, IncorrectCommandForMowerInitialOrientationException {
+            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         int limitX = 5;
         int limitY = 5;
         CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(limitX, limitY);
@@ -99,7 +99,7 @@ class NewMissionControllerTest {
     void execute_should_print_mower_position() throws
             IncorrectCommandForPlateauLimitsException,
             IncorrectInitialCoordinatesException,
-            IncorrectPlateauLimitsException, IncorrectCommandForMowerInitialOrientationException {
+            IncorrectPlateauLimitsException {
         BorderPlateau plateau = new BorderPlateau(100, 100);
         Mower mower = new Mower(new Coordinates(15, 13), Orientation.NORTH, plateau);
 
@@ -128,7 +128,6 @@ class NewMissionControllerTest {
     void execute_should_exit_loop_until_user_exit() throws
             IncorrectCommandForPlateauLimitsException,
             IncorrectPlateauLimitsException,
-            IncorrectCommandForMowerInitialOrientationException,
             IncorrectInitialCoordinatesException
     {
         int eastLimit = 10;
@@ -169,8 +168,7 @@ class NewMissionControllerTest {
     @Test
     void execute_should_not_deploy_an_mower_if_commands_for_initial_position_are_incorrect() throws
             IncorrectCommandForPlateauLimitsException,
-            IncorrectPlateauLimitsException,
-            IncorrectCommandForMowerInitialOrientationException
+            IncorrectPlateauLimitsException
     {
         BorderPlateau plateau = new BorderPlateau(10, 10);
 
@@ -189,8 +187,7 @@ class NewMissionControllerTest {
     @Test
     void execute_should_not_deploy_an_mower_if_orientation_of_commands_for_initial_position_are_incorrect() throws
             IncorrectCommandForPlateauLimitsException,
-            IncorrectPlateauLimitsException,
-            IncorrectCommandForMowerInitialOrientationException
+            IncorrectPlateauLimitsException
     {
         BorderPlateau plateau = new BorderPlateau(10, 10);
 

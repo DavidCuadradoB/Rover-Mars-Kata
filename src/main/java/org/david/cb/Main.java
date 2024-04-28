@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args)
-            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException, IncorrectCommandForMowerInitialOrientationException {
+            throws IncorrectCommandForPlateauLimitsException, IncorrectPlateauLimitsException {
         Scanner scanner = new Scanner(System.in);
         TerminalPlateauCommandReader terminalPlateauCommandReader = new TerminalPlateauCommandReader(scanner);
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();
