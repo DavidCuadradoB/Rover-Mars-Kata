@@ -1,7 +1,7 @@
-package org.david.cb.application.deploy;
+package org.david.cb.application.mower;
 
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandForMowerInitialPositionException;
+import org.david.cb.application.mower.exceptions.IncorrectCommandException;
+import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialPositionException;
 import org.david.cb.model.Coordinates;
 import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.mower.Mower;

@@ -1,4 +1,4 @@
-package org.david.cb.application.deploy.exceptions;
+package org.david.cb.application.mower.exceptions;
 
 public class IncorrectCommandForPlateauLimitsException extends Exception {
     public IncorrectCommandForPlateauLimitsException(String string) {

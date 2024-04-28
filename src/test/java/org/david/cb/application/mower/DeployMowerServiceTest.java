@@ -1,4 +1,4 @@
-package org.david.cb.application.deploy;
+package org.david.cb.application.mower;
 
 import org.david.cb.model.Coordinates;
 import org.david.cb.model.commandreader.MowerCommandReader;

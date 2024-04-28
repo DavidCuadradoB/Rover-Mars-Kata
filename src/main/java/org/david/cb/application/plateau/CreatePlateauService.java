@@ -1,6 +1,6 @@
 package org.david.cb.application.plateau;
 
-import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
+import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;

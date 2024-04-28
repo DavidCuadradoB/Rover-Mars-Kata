@@ -1,7 +1,6 @@
 package org.david.cb.model.mower;
 
 import org.david.cb.model.Coordinates;
-import org.david.cb.application.deploy.exceptions.IncorrectCommandException;
 import org.david.cb.model.plateau.Plateau;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 

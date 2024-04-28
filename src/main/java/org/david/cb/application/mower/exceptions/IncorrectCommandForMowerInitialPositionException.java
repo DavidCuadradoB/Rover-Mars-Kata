@@ -1,4 +1,4 @@
-package org.david.cb.application.deploy.exceptions;
+package org.david.cb.application.mower.exceptions;
 
 public class IncorrectCommandForMowerInitialPositionException extends Exception {
     public IncorrectCommandForMowerInitialPositionException(String string) {
