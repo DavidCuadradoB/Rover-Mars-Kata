@@ -102,6 +102,8 @@ class MowerTest {
         when(plateau.calculatePosition(mower.getCoordinates(), mower.getOrientation()))
                 .thenReturn(firstCoordinates, secondCoordinates);
 
+        mower.execute(commands);
+
         verify(plateau).calculatePosition(mower.getCoordinates(), mower.getOrientation());
         verify(plateau).calculatePosition(firstCoordinates, mower.getOrientation());
     }
