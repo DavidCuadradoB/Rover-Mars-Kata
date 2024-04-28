@@ -4,7 +4,6 @@ import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.deploy.DeployMowerService;
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.model.commandreader.NewMissionCommandReader;
-import org.david.cb.model.commandreader.PlateauLimitsCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.model.plateau.Plateau;
 

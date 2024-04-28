@@ -1,6 +1,6 @@
 package org.david.cb.model.commandreader;
 
-public interface PlateauLimitsCommandReader {
+public interface PlateauCommandReader {
 
     String readPlateauLimits(String question);
 }

@@ -1,7 +1,7 @@
 package org.david.cb.application.plateau;
 
 import org.david.cb.application.deploy.exceptions.IncorrectCommandForPlateauLimitsException;
-import org.david.cb.model.commandreader.PlateauLimitsCommandReader;
+import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.plateau.BorderPlateau;
 import org.david.cb.model.plateau.Plateau;
 
@@ -11,14 +11,14 @@ import java.util.regex.Pattern;
 public class CreatePlateauService {
 
     public static final String REGEX_PLATEAU_LIMITS = "(\\d) (\\d)";
-    private final PlateauLimitsCommandReader plateauLimitsCommandReader;
+    private final PlateauCommandReader plateauCommandReader;
 
-    public CreatePlateauService(PlateauLimitsCommandReader plateauLimitsCommandReader) {
-        this.plateauLimitsCommandReader = plateauLimitsCommandReader;
+    public CreatePlateauService(PlateauCommandReader plateauCommandReader) {
+        this.plateauCommandReader = plateauCommandReader;
     }
 
     public Plateau createPlateau() throws IncorrectCommandForPlateauLimitsException {
-        String plateauLimitsRaw = plateauLimitsCommandReader.readPlateauLimits("Introduce the plateau limits: ");
+        String plateauLimitsRaw = plateauCommandReader.readPlateauLimits("Introduce the plateau limits: ");
         Matcher matcherPlateauLimits = Pattern.compile(REGEX_PLATEAU_LIMITS).matcher(plateauLimitsRaw);
 
         if (matcherPlateauLimits.find()) {

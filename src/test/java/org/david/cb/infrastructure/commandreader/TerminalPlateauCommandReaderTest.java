@@ -11,14 +11,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Scanner;
 
 @ExtendWith(MockitoExtension.class)
-class TerminalPlateauLimitsCommandReaderTest {
+class TerminalPlateauCommandReaderTest {
 
 
     @Mock
     Scanner scanner;
 
     @InjectMocks
-    private TerminalPlateauLimitsCommandReader terminalCommandReader;
+    private TerminalPlateauCommandReader terminalCommandReader;
 
 
     @Test

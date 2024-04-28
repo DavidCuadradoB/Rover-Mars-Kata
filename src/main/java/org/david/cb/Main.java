@@ -6,7 +6,7 @@ import org.david.cb.application.newmissionusecase.NewMissionUseCase;
 import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.infrastructure.commandreader.TerminalMowerCommandReader;
 import org.david.cb.infrastructure.commandreader.TerminalNewMissionCommandReader;
-import org.david.cb.infrastructure.commandreader.TerminalPlateauLimitsCommandReader;
+import org.david.cb.infrastructure.commandreader.TerminalPlateauCommandReader;
 import org.david.cb.infrastructure.commandwritter.TerminalPositionWriter;
 
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IncorrectCommandForPlateauLimitsException {
         Scanner scanner = new Scanner(System.in);
-        TerminalPlateauLimitsCommandReader terminalCommandReader = new TerminalPlateauLimitsCommandReader(scanner);
+        TerminalPlateauCommandReader terminalCommandReader = new TerminalPlateauCommandReader(scanner);
         TerminalPositionWriter terminalPositionWriter = new TerminalPositionWriter();
         TerminalMowerCommandReader terminalMowerCommandReader = new TerminalMowerCommandReader(scanner);
         TerminalNewMissionCommandReader terminalNewMissionCommandReader = new TerminalNewMissionCommandReader(scanner);

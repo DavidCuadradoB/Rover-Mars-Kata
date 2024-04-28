@@ -1,14 +1,14 @@
 package org.david.cb.infrastructure.commandreader;
 
-import org.david.cb.model.commandreader.PlateauLimitsCommandReader;
+import org.david.cb.model.commandreader.PlateauCommandReader;
 
 import java.util.Scanner;
 
-public class TerminalPlateauLimitsCommandReader implements PlateauLimitsCommandReader {
+public class TerminalPlateauCommandReader implements PlateauCommandReader {
 
     private final Scanner scanner;
 
-    public TerminalPlateauLimitsCommandReader(Scanner scanner) {
+    public TerminalPlateauCommandReader(Scanner scanner) {
         this.scanner = scanner;
     }
 
