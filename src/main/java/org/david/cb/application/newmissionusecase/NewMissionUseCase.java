@@ -1,8 +1,8 @@
 package org.david.cb.application.newmissionusecase;
 
-import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.mower.DeployMowerService;
 import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimitsException;
+import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.model.commandreader.NewMissionCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
 import org.david.cb.model.plateau.Plateau;
@@ -26,19 +26,18 @@ public class NewMissionUseCase {
         this.positionWriter = positionWriter;
     }
 
-    public void execute() throws IncorrectCommandForPlateauLimitsException
-    {
+    public void execute() throws IncorrectCommandForPlateauLimitsException {
         Plateau plateau = createPlateauService.createPlateau();
         do {
-            deployMowerService.deploy(plateau).ifPresent(
-                    mower -> positionWriter.write(
-                            mower.getCoordinates().getX() + " " +
-                                    mower.getCoordinates().getY() + " " +
-                                    mower.getOrientation().abbreviation
-                    )
-            );
+            deployMowerService.deploy(plateau)
+                    .ifPresent(mower -> positionWriter.write(
+                                    mower.getCoordinates().getX() + " " +
+                                            mower.getCoordinates().getY() + " " +
+                                            mower.getOrientation().abbreviation
+                            )
+                    );
 
-        } while(
+        } while (
                 !newMissionCommandReader.readExit().equals("exit")
         );
 
