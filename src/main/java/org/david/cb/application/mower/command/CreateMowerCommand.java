@@ -1,4 +1,6 @@
 package org.david.cb.application.mower.command;
 
-public record CreateMowerCommand(int x, int y, String orientation) {
+import org.david.cb.model.mower.Orientation;
+
+public record CreateMowerCommand(int x, int y, Orientation orientation) {
 }

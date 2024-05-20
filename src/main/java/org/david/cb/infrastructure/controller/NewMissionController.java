@@ -3,7 +3,7 @@ package org.david.cb.infrastructure.controller;
 import org.david.cb.application.mower.DeployMowerService;
 import org.david.cb.application.mower.command.CreateMowerCommand;
 import org.david.cb.application.mower.command.MowerMovementCommand;
-import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialOrientationException;
+import org.david.cb.infrastructure.controller.exception.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.plateau.command.CreatePlateauCommand;
@@ -11,6 +11,7 @@ import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.commandreader.NewMissionCommandReader;
 import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
+import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.plateau.Plateau;
 import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.slf4j.Logger;
@@ -93,7 +94,7 @@ public class NewMissionController {
             return new CreateMowerCommand(
                     Integer.parseInt(matcherMowerInitialPosition.group(1)),
                     Integer.parseInt(matcherMowerInitialPosition.group(2)),
-                    matcherMowerInitialPosition.group(3)
+                    fromCommand(matcherMowerInitialPosition.group(3))
             );
         }
         throw new IncorrectCommandForMowerInitialOrientationException(mowerInitialPosition);
@@ -101,6 +102,26 @@ public class NewMissionController {
 
     private MowerMovementCommand getMowerCommandReader() {
         return new MowerMovementCommand(mowerCommandReader.readMowerMovementCommands());
+    }
+
+    private Orientation fromCommand(String orientation)
+            throws IncorrectCommandForMowerInitialOrientationException {
+        switch (orientation) {
+            case "N" -> {
+                return Orientation.NORTH;
+            }
+            case "E" -> {
+                return Orientation.EAST;
+            }
+            case "S" -> {
+                return Orientation.SOUTH;
+            }
+            case "W" -> {
+                return Orientation.WEST;
+            }
+            default ->
+                    throw new IncorrectCommandForMowerInitialOrientationException(orientation);
+        }
     }
 
 }

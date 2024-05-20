@@ -3,11 +3,10 @@ package org.david.cb.application.mower;
 import org.david.cb.application.mower.command.CreateMowerCommand;
 import org.david.cb.application.mower.command.MowerMovementCommand;
 import org.david.cb.application.mower.exceptions.IncorrectCommandException;
-import org.david.cb.application.mower.exceptions.IncorrectCommandForMowerInitialOrientationException;
+import org.david.cb.infrastructure.controller.exception.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.model.Coordinates;
 import org.david.cb.model.mower.Mower;
 import org.david.cb.model.mower.MowerCommand;
-import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.mower.exception.IncorrectInitialCoordinatesException;
 import org.david.cb.model.plateau.Plateau;
 import org.slf4j.Logger;
@@ -46,7 +45,7 @@ public class DeployMowerService {
                 createMowerCommand.y()
         );
 
-        return new Mower(initialCoordinates, fromCommand(createMowerCommand), plateau);
+        return new Mower(initialCoordinates, createMowerCommand.orientation(), plateau);
     }
 
     private List<MowerCommand> getMowerCommandFromString(MowerMovementCommand mowerMovementCommand)
@@ -56,25 +55,5 @@ public class DeployMowerService {
             mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
         return mowerCommands;
-    }
-
-    private Orientation fromCommand(CreateMowerCommand createMowerCommand)
-            throws IncorrectCommandForMowerInitialOrientationException {
-        switch (createMowerCommand.orientation()) {
-            case "N" -> {
-                return Orientation.NORTH;
-            }
-            case "E" -> {
-                return Orientation.EAST;
-            }
-            case "S" -> {
-                return Orientation.SOUTH;
-            }
-            case "W" -> {
-                return Orientation.WEST;
-            }
-            default ->
-                throw new IncorrectCommandForMowerInitialOrientationException(createMowerCommand.orientation());
-        }
     }
 }

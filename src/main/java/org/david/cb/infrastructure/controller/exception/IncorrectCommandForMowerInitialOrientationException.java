@@ -1,4 +1,4 @@
-package org.david.cb.application.mower.exceptions;
+package org.david.cb.infrastructure.controller.exception;
 
 public class IncorrectCommandForMowerInitialOrientationException extends Exception {
     public IncorrectCommandForMowerInitialOrientationException(String string) {

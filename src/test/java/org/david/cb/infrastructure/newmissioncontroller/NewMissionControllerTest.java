@@ -73,7 +73,7 @@ class NewMissionControllerTest {
     }
 
     @Test
-    void execute_should_deploy_a_new_mower() throws
+    void execute_should_deploy_a_new_mower_facing_north() throws
             IncorrectCommandForPlateauLimitsException,
             IncorrectPlateauLimitsException {
         BorderPlateau plateau = new BorderPlateau(100, 100);
@@ -86,7 +86,70 @@ class NewMissionControllerTest {
         when(newMissionCommandReader.readExit()).thenReturn("exit");
 
 
-        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 35, "N");
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 35, Orientation.NORTH);
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
+
+        newMissionController.execute();
+        verify(deployMowerService).deploy(createMowerCommand, mowerMovementCommand, plateau);
+    }
+
+    @Test
+    void execute_should_deploy_a_new_mower_facing_east() throws
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectPlateauLimitsException {
+        BorderPlateau plateau = new BorderPlateau(100, 100);
+        CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(100 ,100);
+
+        when(createPlateauService.createPlateau(createPlateauCommand)).thenReturn(plateau);
+        when(plateauCommandReader.readPlateauLimits()).thenReturn("100 100");
+        when(mowerCommandReader.readMowerInitialPositionCommands()).thenReturn("15 35 E");
+        when(mowerCommandReader.readMowerMovementCommands()).thenReturn("MMM");
+        when(newMissionCommandReader.readExit()).thenReturn("exit");
+
+
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 35, Orientation.EAST);
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
+
+        newMissionController.execute();
+        verify(deployMowerService).deploy(createMowerCommand, mowerMovementCommand, plateau);
+    }
+
+    @Test
+    void execute_should_deploy_a_new_mower_facing_south() throws
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectPlateauLimitsException {
+        BorderPlateau plateau = new BorderPlateau(100, 100);
+        CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(100 ,100);
+
+        when(createPlateauService.createPlateau(createPlateauCommand)).thenReturn(plateau);
+        when(plateauCommandReader.readPlateauLimits()).thenReturn("100 100");
+        when(mowerCommandReader.readMowerInitialPositionCommands()).thenReturn("15 35 S");
+        when(mowerCommandReader.readMowerMovementCommands()).thenReturn("MMM");
+        when(newMissionCommandReader.readExit()).thenReturn("exit");
+
+
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 35, Orientation.SOUTH);
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
+
+        newMissionController.execute();
+        verify(deployMowerService).deploy(createMowerCommand, mowerMovementCommand, plateau);
+    }
+
+    @Test
+    void execute_should_deploy_a_new_mower_facing_west() throws
+            IncorrectCommandForPlateauLimitsException,
+            IncorrectPlateauLimitsException {
+        BorderPlateau plateau = new BorderPlateau(100, 100);
+        CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(100 ,100);
+
+        when(createPlateauService.createPlateau(createPlateauCommand)).thenReturn(plateau);
+        when(plateauCommandReader.readPlateauLimits()).thenReturn("100 100");
+        when(mowerCommandReader.readMowerInitialPositionCommands()).thenReturn("15 35 W");
+        when(mowerCommandReader.readMowerMovementCommands()).thenReturn("MMM");
+        when(newMissionCommandReader.readExit()).thenReturn("exit");
+
+
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 35, Orientation.WEST);
         MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
 
         newMissionController.execute();
@@ -102,7 +165,7 @@ class NewMissionControllerTest {
         Mower mower = new Mower(new Coordinates(15, 13), Orientation.NORTH, plateau);
 
         CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(100 ,100 );
-        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 13, "N");
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(15, 13, Orientation.NORTH);
         MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
 
         when(createPlateauService.createPlateau(createPlateauCommand)).thenReturn(plateau);
@@ -132,7 +195,7 @@ class NewMissionControllerTest {
         int northLimit = 10;
         BorderPlateau plateau = new BorderPlateau(eastLimit, northLimit);
         CreatePlateauCommand createPlateauCommand = new CreatePlateauCommand(eastLimit, northLimit);
-        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 1, "N");
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 1, Orientation.NORTH);
         MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("MMM");
         Mower mower = new Mower(new Coordinates(1, 1), Orientation.NORTH, plateau);
 
