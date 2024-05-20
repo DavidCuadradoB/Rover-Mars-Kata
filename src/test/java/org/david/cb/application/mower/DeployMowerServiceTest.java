@@ -41,6 +41,57 @@ class DeployMowerServiceTest {
     }
 
     @Test
+    void deploy_create_correct_mower_when_orientation_is_facing_north() throws IncorrectPlateauLimitsException {
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 2, "N");
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("");
+
+        BorderPlateau plateau = new BorderPlateau(5, 5);
+        Optional<Mower> optionalMower = deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+
+        Assertions.assertTrue(optionalMower.isPresent());
+        Mower mower = optionalMower.get();
+        Assertions.assertEquals(Orientation.NORTH, mower.getOrientation());
+    }
+
+    @Test
+    void deploy_create_correct_mower_when_orientation_is_facing_east() throws IncorrectPlateauLimitsException {
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 2, "E");
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("");
+
+        BorderPlateau plateau = new BorderPlateau(5, 5);
+        Optional<Mower> optionalMower = deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+
+        Assertions.assertTrue(optionalMower.isPresent());
+        Mower mower = optionalMower.get();
+        Assertions.assertEquals(Orientation.EAST, mower.getOrientation());
+    }
+
+    @Test
+    void deploy_create_correct_mower_when_orientation_is_facing_south() throws IncorrectPlateauLimitsException {
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 2, "S");
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("");
+
+        BorderPlateau plateau = new BorderPlateau(5, 5);
+        Optional<Mower> optionalMower = deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+
+        Assertions.assertTrue(optionalMower.isPresent());
+        Mower mower = optionalMower.get();
+        Assertions.assertEquals(Orientation.SOUTH, mower.getOrientation());
+    }
+
+    @Test
+    void deploy_create_correct_mower_when_orientation_is_facing_west() throws IncorrectPlateauLimitsException {
+        CreateMowerCommand createMowerCommand = new CreateMowerCommand(1, 2, "W");
+        MowerMovementCommand mowerMovementCommand = new MowerMovementCommand("");
+        BorderPlateau plateau = new BorderPlateau(5, 5);
+        Optional<Mower> optionalMower = deployMowerService.deploy(createMowerCommand, mowerMovementCommand, plateau);
+
+        Assertions.assertTrue(optionalMower.isPresent());
+        Mower mower = optionalMower.get();
+        Assertions.assertEquals(Orientation.WEST, mower.getOrientation());
+    }
+
+    @Test
     void deploy_should_return_optional_empty_when_the_movement_has_incorrect_command()
             throws IncorrectPlateauLimitsException {
         CreateMowerCommand createMowerCommand = new CreateMowerCommand(1,2 , "N");

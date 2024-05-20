@@ -46,12 +46,7 @@ public class DeployMowerService {
                 createMowerCommand.y()
         );
 
-        Orientation orientation = Orientation.forAbbreviation(createMowerCommand.orientation())
-                .orElseThrow(() ->
-                        new IncorrectCommandForMowerInitialOrientationException(createMowerCommand.orientation())
-                );
-
-        return new Mower(initialCoordinates, orientation, plateau);
+        return new Mower(initialCoordinates, fromCommand(createMowerCommand), plateau);
     }
 
     private List<MowerCommand> getMowerCommandFromString(MowerMovementCommand mowerMovementCommand)
@@ -61,5 +56,25 @@ public class DeployMowerService {
             mowerCommands.add(MowerCommand.fromChar(c).orElseThrow(() -> new IncorrectCommandException(c)));
         }
         return mowerCommands;
+    }
+
+    private Orientation fromCommand(CreateMowerCommand createMowerCommand)
+            throws IncorrectCommandForMowerInitialOrientationException {
+        switch (createMowerCommand.orientation()) {
+            case "N" -> {
+                return Orientation.NORTH;
+            }
+            case "E" -> {
+                return Orientation.EAST;
+            }
+            case "S" -> {
+                return Orientation.SOUTH;
+            }
+            case "W" -> {
+                return Orientation.WEST;
+            }
+            default ->
+                throw new IncorrectCommandForMowerInitialOrientationException(createMowerCommand.orientation());
+        }
     }
 }
