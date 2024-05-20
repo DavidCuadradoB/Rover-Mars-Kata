@@ -3,20 +3,24 @@ package org.david.cb.infrastructure.controller;
 import org.david.cb.application.mower.DeployMowerService;
 import org.david.cb.application.mower.command.CreateMowerCommand;
 import org.david.cb.application.mower.command.MowerMovementCommand;
-import org.david.cb.infrastructure.controller.exception.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.application.mower.exceptions.IncorrectCommandForPlateauLimitsException;
 import org.david.cb.application.plateau.CreatePlateauService;
 import org.david.cb.application.plateau.command.CreatePlateauCommand;
+import org.david.cb.infrastructure.controller.exception.IncorrectCommandException;
+import org.david.cb.infrastructure.controller.exception.IncorrectCommandForMowerInitialOrientationException;
 import org.david.cb.model.commandreader.MowerCommandReader;
 import org.david.cb.model.commandreader.NewMissionCommandReader;
 import org.david.cb.model.commandreader.PlateauCommandReader;
 import org.david.cb.model.commandwriter.PositionWriter;
+import org.david.cb.model.mower.MowerCommand;
 import org.david.cb.model.mower.Orientation;
 import org.david.cb.model.plateau.Plateau;
 import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 
 import static java.util.regex.Pattern.compile;
@@ -64,6 +68,8 @@ public class NewMissionController {
                         );
             } catch (IncorrectCommandForMowerInitialOrientationException exception) {
                 logger.error("Incorrect command for mower initial orientation.", exception);
+            } catch (IncorrectCommandException exception) {
+                logger.error("Incorrect command for mower movement.", exception);
             }
 
         } while (
@@ -100,8 +106,30 @@ public class NewMissionController {
         throw new IncorrectCommandForMowerInitialOrientationException(mowerInitialPosition);
     }
 
-    private MowerMovementCommand getMowerCommandReader() {
-        return new MowerMovementCommand(mowerCommandReader.readMowerMovementCommands());
+    private MowerMovementCommand getMowerCommandReader()
+            throws IncorrectCommandException {
+        List<MowerCommand> mowerCommands = new ArrayList<>();
+        for (char c : mowerCommandReader.readMowerMovementCommands().toCharArray()) {
+            mowerCommands.add(fromChar(c));
+        }
+        return new MowerMovementCommand(mowerCommands);
+    }
+
+    private MowerCommand fromChar(char command) throws IncorrectCommandException {
+        switch (command) {
+            case 'L' -> {
+                return MowerCommand.ROTATE_LEFT;
+            }
+            case 'R' -> {
+                return MowerCommand.ROTATE_RIGHT;
+            }
+            case 'M' -> {
+                return MowerCommand.MOVE_FORWARD;
+            }
+            default ->  {
+                throw new IncorrectCommandException(command);
+            }
+        }
     }
 
     private Orientation fromCommand(String orientation)

@@ -1,7 +1,5 @@
 package org.david.cb.model.mower;
 
-import java.util.Optional;
-
 public enum MowerCommand {
 
     ROTATE_RIGHT('R'),
@@ -12,15 +10,6 @@ public enum MowerCommand {
 
     MowerCommand(char command) {
         this.command = command;
-    }
-
-    public static Optional<MowerCommand> fromChar(char command) {
-        for (MowerCommand mowerCommand : MowerCommand.values()) {
-            if (mowerCommand.command == command) {
-                return Optional.of(mowerCommand);
-            }
-        }
-        return Optional.empty();
     }
 
 }
