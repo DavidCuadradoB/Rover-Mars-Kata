@@ -6,12 +6,14 @@ import org.david.cb.model.plateau.Plateau;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Mower {
 
     private Coordinates coordinates;
     private Orientation orientation;
     private final Plateau plateau;
+    private final UUID id = UUID.randomUUID();
 
     public Mower(Coordinates coordinates, Orientation orientation, Plateau plateau) throws IncorrectInitialCoordinatesException {
         if (plateau.checkCoordinates(coordinates)) {
@@ -78,11 +80,11 @@ public class Mower {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mower mower = (Mower) o;
-        return Objects.equals(coordinates, mower.coordinates) && orientation == mower.orientation && Objects.equals(plateau, mower.plateau);
+        return Objects.equals(id, mower.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(coordinates, orientation, plateau);
+        return Objects.hashCode(id);
     }
 }
