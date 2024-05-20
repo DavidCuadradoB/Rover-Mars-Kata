@@ -21,7 +21,7 @@ public class DeployMowerService {
             MowerMovementCommand mowerMovementCommand,
             Plateau plateau) {
         try {
-            Mower mower = getMower(createMowerCommand, plateau);
+            Mower mower = createMower(createMowerCommand, plateau);
             return Optional.of(mower.execute(mowerMovementCommand.movements()));
         } catch (IncorrectCommandForMowerInitialOrientationException | IncorrectInitialCoordinatesException exception) {
             logger.error("Impossible to deploy the mower into the plateau", exception);
@@ -29,7 +29,7 @@ public class DeployMowerService {
         }
     }
 
-    private Mower getMower(CreateMowerCommand createMowerCommand, Plateau plateau)
+    private Mower createMower(CreateMowerCommand createMowerCommand, Plateau plateau)
             throws IncorrectCommandForMowerInitialOrientationException, IncorrectInitialCoordinatesException {
 
         Coordinates initialCoordinates = new Coordinates(
