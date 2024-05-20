@@ -7,13 +7,15 @@ import org.david.cb.model.plateau.exception.IncorrectPlateauLimitsException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class BorderPlateau implements Plateau {
 
-    public static final int SOUTH_LIMIT = 0;
-    public static final int WEST_LIMIT = 0;
+    private static final int SOUTH_LIMIT = 0;
+    private static final int WEST_LIMIT = 0;
     private final int eastLimit;
     private final int northLimit;
+    private final UUID uuid = UUID.randomUUID();
 
     private final List<Coordinates> obstacles = new ArrayList<>();
 
@@ -95,11 +97,11 @@ public class BorderPlateau implements Plateau {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BorderPlateau that = (BorderPlateau) o;
-        return eastLimit == that.eastLimit && northLimit == that.northLimit && Objects.equals(obstacles, that.obstacles);
+        return Objects.equals(uuid, that.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eastLimit, northLimit, obstacles);
+        return Objects.hashCode(uuid);
     }
 }
