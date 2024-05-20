@@ -67,9 +67,7 @@ This diagram is the representation of the happy path of the application.
    5. `PlateauCommandReader`: Returns the commands for the plateau creation.
    6. `MowerCommandReader`: Returns the commands for the mower control.
    7. `Mower`: Representation of the Mower. It is not agnostic since it has the logic to move itself, rotate itself and create itself.
-      1. **IMPORTANT!** this looks like an an `Entity`, but looks like a `Value Object`. This should have an Id and the compilation between two Mower should be with this id, but since this is a kata, I prefer not overcomplicate it. 
    8. `Plateau`: Representation of the Plateau. It is not agnostic since it has the logic to calculate the next available coordinate and control the obstacles.
-      1. **IMPORTANT!** this looks like an `Entity`, but looks like a `Value Object`. This should have an Id and the compilation between two Mower should be with this id, but since this is a kata, I prefer not overcomplicate it.
    9. `Coordinates`: This is a `Value Object` that represent a coordinate.
    10. `Orientation`: This is a `Value Object` that represents an Orientation: North, South, East and West.
 3. In all classes, they depend on abstractions, not implementations, complying with the `Dependency inversion principle`.
@@ -84,10 +82,6 @@ This diagram is the representation of the happy path of the application.
 2. This could be easiest using an api system. Allowing to create and control the Plateau and the Mower
 3. The `NewMissionController` could have some business logic. Depending on if you consider the flow of create the plateau and deploy the Mower as business logic, this could have business logic. But as I said before, this is a solution to get the user information in the infrastructure layer.
    1. This is similar what you have in an API, but it's more complex because in an api, the request are independents. In this case, the user needs to keep introducing information to create new Mowers.
-4. I would like to analyse better if all the models should be `immutables`:
-   1. In general: `Entities` should be Mutable and `Value Object` should be Immutable. But in this system, the Mower is created and moved in one usecase, and the Plateau only saved the obstacles. So this is why decided do it immutable. But I would like to analyse this decision with more time and with other point of view.
-   2. Since those are immutable and the creation of the `Mower` is "complex", maybe I could add a `Factory` here to create the `Mowers` where check the creation of the `Mower`
-   3. This `immutability` makes that the `execute()` method is weird. Probably if `Mower` was mutable it could be easier.
-5. I considered the "Deploy of a Mower" as: The "creation" and the "movement" of the Mower. This could be divided in 2 parts, first deploy and second the movement. In an Api it could be clear, but since for this you need to save the Mower in some ddbb system, I prefer not overcomplicate the Kata and consider both actions as one.
-6. It has dependency with Spring-boot since I tried to use it for the dependency injection. But since the project is using the configured Spring log4j, to remove spring I need to configure log4j. Since I'm running out of time, I don't want to spend time configuring log4j, so I decided keep Spring for it. Of course in a real project I would configure log4j (or better, I could use Spring-Boot).
-7. There are some getters in the Mower and Plateau that could be privated or directly removed since they are only used in test. The assertions of the test should be changed comparing between Mowers and Plateaus instead of the internal fields.
+4. I considered the "Deploy of a Mower" as: The "creation" and the "movement" of the Mower. This could be divided in 2 parts, first deploy and second the movement. In an Api it could be clear, but since for this you need to save the Mower in some ddbb system, I prefer not overcomplicate the Kata and consider both actions as one.
+5. It has dependency with Spring-boot since I tried to use it for the dependency injection. But since the project is using the configured Spring log4j, to remove spring I need to configure log4j. Since I'm running out of time, I don't want to spend time configuring log4j, so I decided keep Spring for it. Of course in a real project I would configure log4j (or better, I could use Spring-Boot).
+6. There are some getters in the Mower and Plateau that could be private or directly removed since they are only used in test. The assertions of the test should be changed comparing between Mowers and Plateaus instead of the internal fields.
