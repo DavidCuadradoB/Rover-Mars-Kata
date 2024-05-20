@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class Mower {
 
-    private final Coordinates coordinates;
-    private final Orientation orientation;
+    private Coordinates coordinates;
+    private Orientation orientation;
     private final Plateau plateau;
 
     public Mower(Coordinates coordinates, Orientation orientation, Plateau plateau) throws IncorrectInitialCoordinatesException {
@@ -32,52 +32,44 @@ public class Mower {
     }
 
     public Mower execute(List<MowerCommand> commands) throws IncorrectInitialCoordinatesException {
-
-        Mower moved_mower = this;
-
         for (MowerCommand command : commands) {
             if (MowerCommand.ROTATE_LEFT.equals(command)) {
-                moved_mower = moved_mower.rotateLeft();
+                this.rotateLeft();
             } else if (MowerCommand.ROTATE_RIGHT.equals(command)) {
-                moved_mower = moved_mower.rotateRight();
+                this.rotateRight();
             } else if (MowerCommand.MOVE_FORWARD.equals(command)) {
-                moved_mower = moved_mower.moveForward();
+                this.moveForward();
             }
         }
-        plateau.addObstacle(moved_mower.coordinates);
-
-        return moved_mower;
+        plateau.addObstacle(this.coordinates);
+        return this;
     }
 
-    private Mower moveForward() throws IncorrectInitialCoordinatesException {
-        return new Mower(
-                plateau.calculatePosition(this.coordinates, this.orientation),
-                this.orientation,
-                this.plateau
-        );
+    private void moveForward() {
+        this.coordinates=plateau.calculatePosition(this.coordinates, this.orientation);
     }
 
-    private Mower rotateRight() throws IncorrectInitialCoordinatesException {
+    private void rotateRight() {
         if (Orientation.NORTH == this.orientation) {
-            return new Mower(this.coordinates, Orientation.EAST, this.plateau);
+            this.orientation=Orientation.EAST;
         } else if (Orientation.EAST == this.orientation) {
-            return new Mower(this.coordinates, Orientation.SOUTH, this.plateau);
+            this.orientation=Orientation.SOUTH;
         } else if (Orientation.SOUTH == this.orientation) {
-            return new Mower(this.coordinates, Orientation.WEST, this.plateau);
+            this.orientation=Orientation.WEST;
         } else {
-            return new Mower(this.coordinates, Orientation.NORTH, this.plateau);
+            this.orientation=Orientation.NORTH;
         }
     }
 
-    private Mower rotateLeft() throws IncorrectInitialCoordinatesException {
+    private void rotateLeft() {
         if (Orientation.NORTH == this.orientation) {
-            return new Mower(this.coordinates, Orientation.WEST, this.plateau);
+            this.orientation=Orientation.WEST;
         } else if (Orientation.WEST == this.orientation) {
-            return new Mower(this.coordinates, Orientation.SOUTH, this.plateau);
+            this.orientation=Orientation.SOUTH;
         } else if (Orientation.SOUTH == this.orientation) {
-            return new Mower(this.coordinates, Orientation.EAST, this.plateau);
+            this.orientation=Orientation.EAST;
         } else {
-            return new Mower(this.coordinates, Orientation.NORTH, this.plateau);
+            this.orientation=Orientation.NORTH;
         }
     }
 

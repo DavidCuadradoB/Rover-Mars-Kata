@@ -68,9 +68,9 @@ class MowerTest {
         Coordinates expectedCoordinates = new Coordinates(1, 1);
         when(plateau.calculatePosition(mower.getCoordinates(), mower.getOrientation())).thenReturn(expectedCoordinates);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(movedMower.getCoordinates(), expectedCoordinates);
+        assertEquals(mower.getCoordinates(), expectedCoordinates);
 
     }
 
@@ -91,20 +91,22 @@ class MowerTest {
     @Test
     void execute_should_move_the_mower()
             throws IncorrectInitialCoordinatesException {
-        Mower mower = getMower(NORTH);
+        Mower mower = getMower(SOUTH);
         List<MowerCommand> commands = List.of(
                 MowerCommand.MOVE_FORWARD,
                 MowerCommand.MOVE_FORWARD
         );
-
-        Coordinates firstCoordinates = new Coordinates(1, 1);
-        Coordinates secondCoordinates = new Coordinates(1, 2);
-        when(plateau.calculatePosition(mower.getCoordinates(), mower.getOrientation()))
-                .thenReturn(firstCoordinates, secondCoordinates);
+        Coordinates originalCoordinates = mower.getCoordinates();
+        Coordinates firstCoordinates = new Coordinates(1, 2);
+        Coordinates secondCoordinates = new Coordinates(1, 1);
+        when(plateau.calculatePosition(originalCoordinates, mower.getOrientation()))
+                .thenReturn(firstCoordinates);
+        when(plateau.calculatePosition(firstCoordinates, mower.getOrientation()))
+                .thenReturn(secondCoordinates);
 
         mower.execute(commands);
 
-        verify(plateau).calculatePosition(mower.getCoordinates(), mower.getOrientation());
+        verify(plateau).calculatePosition(originalCoordinates, mower.getOrientation());
         verify(plateau).calculatePosition(firstCoordinates, mower.getOrientation());
     }
 
@@ -114,9 +116,9 @@ class MowerTest {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(EAST, movedMower.getOrientation());
+        assertEquals(EAST, mower.getOrientation());
     }
 
     @Test
@@ -125,9 +127,9 @@ class MowerTest {
         Mower mower = getMower(EAST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(SOUTH, movedMower.getOrientation());
+        assertEquals(SOUTH, mower.getOrientation());
     }
 
     @Test
@@ -136,9 +138,9 @@ class MowerTest {
         Mower mower = getMower(SOUTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(WEST, movedMower.getOrientation());
+        assertEquals(WEST, mower.getOrientation());
     }
 
     @Test
@@ -147,9 +149,9 @@ class MowerTest {
         Mower mower = getMower(WEST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_RIGHT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(NORTH, movedMower.getOrientation());
+        assertEquals(NORTH, mower.getOrientation());
     }
 
     @Test
@@ -158,9 +160,9 @@ class MowerTest {
         Mower mower = getMower(NORTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(WEST, movedMower.getOrientation());
+        assertEquals(WEST, mower.getOrientation());
     }
 
     @Test
@@ -169,9 +171,9 @@ class MowerTest {
         Mower mower = getMower(WEST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(SOUTH, movedMower.getOrientation());
+        assertEquals(SOUTH, mower.getOrientation());
     }
 
     @Test
@@ -180,9 +182,9 @@ class MowerTest {
         Mower mower = getMower(SOUTH);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(EAST, movedMower.getOrientation());
+        assertEquals(EAST, mower.getOrientation());
     }
 
     @Test
@@ -191,9 +193,9 @@ class MowerTest {
         Mower mower = getMower(EAST);
         List<MowerCommand> commands = List.of(MowerCommand.ROTATE_LEFT);
 
-        Mower movedMower = mower.execute(commands);
+        mower.execute(commands);
 
-        assertEquals(NORTH, movedMower.getOrientation());
+        assertEquals(NORTH, mower.getOrientation());
     }
 
     private Mower getMower(Orientation orientation) throws IncorrectInitialCoordinatesException {
